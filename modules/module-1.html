@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vantage SSP — Module 1 Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --surface:#ffffff;
+      --surface-2:#f8fbfe;
+      --text:#132238;
+      --muted:#6c7a90;
+      --border:#dce6f1;
+      --blue:#2f6df6;
+      --blue-dark:#1f56cf;
+      --teal:#3fb9b0;
+      --yellow:#fff1bf;
+      --yellow-border:#efd883;
+      --shadow:0 18px 42px rgba(16,40,78,.09);
+      --radius:22px;
+      --content:840px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(47,109,246,.10), transparent 24%),
+        radial-gradient(circle at 90% 20%, rgba(63,185,176,.10), transparent 18%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+    }
+    .topbar{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter:blur(12px);
+      background:rgba(244,247,251,.78);
+      border-bottom:1px solid rgba(220,230,241,.9);
+    }
+    .topbar-inner{
+      max-width:1100px; margin:0 auto; padding:14px 22px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:-.02em}
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background:linear-gradient(135deg, var(--blue), #7ea8ff);
+      display:grid; place-items:center; color:#fff; font-size:16px; box-shadow:0 8px 18px rgba(47,109,246,.24);
+    }
+    .nav{display:flex; gap:10px; flex-wrap:wrap}
+    .nav a{
+      text-decoration:none; color:#345; font-size:13px; font-weight:700;
+      padding:10px 12px; border-radius:999px;
+    }
+    .nav a:hover{background:#e9f1ff; color:var(--blue)}
+    .page{max-width:1100px; margin:0 auto; padding:28px 20px 70px}
+    .hero{
+      background:linear-gradient(135deg, rgba(255,255,255,.92), rgba(242,247,255,.98));
+      border:1px solid rgba(220,230,241,.95);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      padding:36px 38px;
+      display:grid; grid-template-columns:1.15fr .85fr; gap:26px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:after{
+      content:""; position:absolute; right:-40px; top:-30px; width:220px; height:220px; border-radius:50%;
+      background:radial-gradient(circle, rgba(47,109,246,.18), rgba(47,109,246,0));
+    }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:8px;
+      background:#eaf2ff; color:var(--blue);
+      padding:8px 12px; border-radius:999px;
+      font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em;
+    }
+    h1{
+      margin:16px 0 14px; font-size:48px; line-height:1.02; letter-spacing:-.04em;
+    }
+    .hero p{font-size:17px; line-height:1.7; color:var(--muted); max-width:62ch; margin:0}
+    .hero-side{
+      background:linear-gradient(180deg,#fff,#f5f9ff);
+      border:1px solid rgba(47,109,246,.12);
+      border-radius:26px; padding:22px;
+      box-shadow:0 16px 32px rgba(47,109,246,.08);
+      align-self:stretch;
+    }
+    .hero-side h3{margin:0 0 10px; font-size:18px}
+    .hero-side p{font-size:14px; margin:0 0 16px}
+    .metric-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+    .metric{
+      padding:14px; border-radius:18px; background:#fff; border:1px solid var(--border);
+    }
+    .metric span{display:block; font-size:11px; text-transform:uppercase; font-weight:800; color:var(--muted); letter-spacing:.06em; margin-bottom:7px}
+    .metric strong{display:block; font-size:20px; letter-spacing:-.03em}
+
+    .lesson{
+      max-width:var(--content); margin:26px auto 0;
+      display:grid; gap:20px;
+    }
+    .block{
+      background:var(--surface); border:1px solid var(--border); border-radius:28px;
+      box-shadow:0 12px 28px rgba(19,34,56,.05); overflow:hidden;
+    }
+    .block-inner{padding:28px 30px}
+    .section-kicker{
+      margin-bottom:10px; color:var(--blue); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em;
+    }
+    h2{margin:0 0 12px; font-size:30px; line-height:1.12; letter-spacing:-.03em}
+    .lede{font-size:16px; line-height:1.75; color:var(--muted); margin:0}
+
+    .statement{
+      background:linear-gradient(135deg, #2f6df6, #6f9bff);
+      color:#fff;
+    }
+    .statement .block-inner{padding:30px}
+    .statement h2{font-size:34px; margin-bottom:10px}
+    .statement p{margin:0; font-size:17px; line-height:1.65; color:rgba(255,255,255,.92)}
+
+    .twocol{
+      display:grid; grid-template-columns:1fr 1fr; gap:18px;
+    }
+    .card{
+      background:var(--surface-2); border:1px solid var(--border); border-radius:22px; padding:20px;
+    }
+    .card h3{margin:0 0 10px; font-size:18px; letter-spacing:-.02em}
+    .card p{margin:0; color:var(--muted); line-height:1.65; font-size:15px}
+
+    .process{
+      display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px;
+    }
+    .step{
+      background:linear-gradient(180deg,#fff,#f8fbff); border:1px solid var(--border); border-radius:22px; padding:18px; position:relative;
+    }
+    .step-num{
+      width:34px; height:34px; border-radius:12px; display:grid; place-items:center; margin-bottom:12px;
+      background:#eaf2ff; color:var(--blue); font-size:14px; font-weight:800;
+    }
+    .step h4{margin:0 0 8px; font-size:16px}
+    .step p{margin:0; font-size:14px; line-height:1.6; color:var(--muted)}
+
+    .accordion-item{border-top:1px solid var(--border)}
+    .accordion-item:first-child{border-top:none}
+    .accordion-btn{
+      width:100%; border:none; background:none; cursor:pointer; text-align:left;
+      display:flex; justify-content:space-between; gap:18px; align-items:center;
+      padding:22px 30px; font:inherit; color:inherit;
+    }
+    .accordion-btn strong{font-size:17px}
+    .accordion-btn span{color:var(--muted); font-size:14px}
+    .accordion-icon{
+      width:30px; height:30px; border-radius:10px; background:#edf3ff; color:var(--blue);
+      display:grid; place-items:center; font-size:20px; flex:0 0 auto;
+    }
+    .accordion-panel{
+      max-height:0; overflow:hidden; transition:max-height .35s ease;
+      background:#fbfdff;
+    }
+    .accordion-panel-inner{padding:0 30px 24px; color:var(--muted); line-height:1.75; font-size:15px}
+    .accordion-item.open .accordion-panel{max-height:220px}
+
+    .sticky-note{
+      background:var(--yellow); border:1px solid var(--yellow-border); border-radius:20px;
+      padding:18px 18px 16px; position:relative; box-shadow:0 14px 24px rgba(195,170,59,.12);
+      transform:rotate(-1.2deg);
+    }
+    .sticky-note:before{
+      content:"Design note"; position:absolute; top:-11px; left:18px;
+      background:#ffd94c; color:#664f00; font-size:11px; font-weight:800; padding:6px 9px;
+      border-radius:999px; text-transform:uppercase; letter-spacing:.06em;
+    }
+    .sticky-note p{margin:10px 0 0; font-size:14px; color:#5b4f20; line-height:1.65}
+
+    .knowledge{
+      display:grid; gap:16px;
+    }
+    .question{
+      border:1px solid var(--border); border-radius:22px; padding:22px; background:#fbfdff;
+    }
+    .question h3{margin:0 0 14px; font-size:18px}
+    .options{display:grid; gap:10px}
+    .option{
+      display:flex; gap:12px; align-items:flex-start; padding:14px 16px; border:1px solid var(--border); border-radius:16px; cursor:pointer; background:#fff;
+      transition:.2s ease;
+    }
+    .option:hover{border-color:#b9cdfd; background:#f6f9ff}
+    .option input{margin-top:3px}
+    .feedback{
+      margin-top:12px; padding:12px 14px; border-radius:14px; font-size:14px; display:none;
+    }
+    .feedback.show{display:block}
+    .feedback.correct{background:#eaf8f2; color:#205b3b; border:1px solid #bfe5cf}
+    .feedback.incorrect{background:#fff1f1; color:#8b2d2d; border:1px solid #efc3c3}
+
+    .voice-card{
+      background:linear-gradient(180deg,#f8fbff,#eef5ff); border:1px solid #d7e4ff; border-radius:22px; padding:22px;
+    }
+    .voice-card h3{margin:0 0 10px; font-size:18px}
+    .voice-card p{margin:0 0 16px; font-size:15px; line-height:1.7; color:var(--muted)}
+    .prompt-box{
+      padding:14px 16px; border-radius:16px; background:#fff; border:1px dashed #b7caf7; color:#39506e; font-size:14px;
+    }
+    .controls{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+    .btn{
+      border:none; cursor:pointer; border-radius:999px; padding:12px 16px; font-weight:700; font-size:14px;
+    }
+    .btn-primary{background:var(--blue); color:#fff}
+    .btn-primary:hover{background:var(--blue-dark)}
+    .btn-secondary{background:#eaf2ff; color:var(--blue)}
+    .recording-status{margin-top:12px; color:var(--muted); font-size:14px}
+    audio{margin-top:12px; width:100%}
+
+    .footer-cta{
+      text-align:center; padding:18px 10px 6px; color:var(--muted); font-size:14px; line-height:1.6;
+    }
+
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .twocol,.process{grid-template-columns:1fr}
+    }
+    @media (max-width: 680px){
+      .page{padding:18px 14px 60px}
+      .topbar-inner{padding:12px 14px}
+      h1{font-size:38px}
+      .hero,.block-inner,.statement .block-inner{padding:24px 22px}
+      .accordion-btn{padding:18px 22px}
+      .accordion-panel-inner{padding:0 22px 22px}
+      .nav{display:none}
+      .metric-grid{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><div class="logo">V</div> Vantage SSP • Module 1 Showcase</div>
+      <nav class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#problem">Problem</a>
+        <a href="#practice">Practice</a>
+        <a href="#check">Knowledge Check</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero" id="overview">
+      <div>
+        <div class="eyebrow">SSP inspired microlearning piece</div>
+        <h1>The problem Vantage solves</h1>
+        <p>This is Module 1 of a 6-part learning course designed to help new and existing sales reps understand the fundamentals of a new cloud infrastructure feature. The learning goal: equip sales reps to explain latency, cost pressure, and signal loss in buyer language without relying on technical jargon.</p>
+      </div>
+      <aside class="hero-side">
+        <h3>Instructional intent</h3>
+        <p>This module uses concise instruction, worked examples, interactive reveals, knowledge checks, and an applied communication task to build fluency with buyer-facing messaging.</p>
+        <div class="metric-grid">
+          <div class="metric"><span>Format</span><strong>Microlearning</strong></div>
+          <div class="metric"><span>Estimated time</span><strong>8–10 min</strong></div>
+          <div class="metric"><span>Primary method</span><strong>Retrieval</strong></div>
+          <div class="metric"><span>Audience</span><strong>Sales reps</strong></div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="lesson">
+      <section class="block statement" id="problem">
+        <div class="block-inner">
+          <h2>Buyers do not purchase infrastructure for its own sake.</h2>
+          <p>They care when infrastructure affects what they actually experience: slower decisions, higher operating cost, weaker use of signals, and less confidence that their setup can scale efficiently.</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-inner">
+          <div class="section-kicker">Lesson objective</div>
+          <h2>By the end of this lesson, the learner can explain the business problem in plain language.</h2>
+          <p class="lede">The aim is not deep technical mastery. It is conversational fluency: describing why latency, cloud cost, and signal distance matter to a buyer making infrastructure decisions.</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-inner">
+          <div class="section-kicker">Compare and contrast</div>
+          <h2>Traditional setup vs. Vantage approach</h2>
+          <div class="twocol">
+            <div class="card">
+              <h3>Traditional setup</h3>
+              <p>Decisioning happens farther away from the live auction context. That can increase infrastructure expense, add processing delay, and limit how effectively available signals are used at the moment a decision is made.</p>
+            </div>
+            <div class="card">
+              <h3>Vantage approach</h3>
+              <p>Decisioning moves closer to the impression opportunity. That helps reduce unnecessary compute drag, improves responsiveness, and allows richer inputs to influence the outcome when timing matters most.</p>
+            </div>
+          </div>
+          <div style="margin-top:18px" class="sticky-note">
+            <p><strong>Design note:</strong> This section uses a side-by-side comparison instead of feature bullets because it reduces jargon and helps the learner see the change in operating model, not just the product label.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-inner">
+          <div class="section-kicker">Process block</div>
+          <h2>Three pain points to remember</h2>
+          <p class="lede">A learner does not need every technical nuance. They need a compact framework they can recall in a conversation.</p>
+          <div class="process">
+            <div class="step">
+              <div class="step-num">1</div>
+              <h4>Latency pressure</h4>
+              <p>If decisions take too long, value is lost. Speed matters because programmatic opportunities are time-sensitive.</p>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <h4>Infrastructure cost</h4>
+              <p>As scale grows, inefficient cloud architecture can become an ongoing cost issue rather than a neutral technical choice.</p>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <h4>Signal distance</h4>
+              <p>If useful inputs are harder to act on in real time, buyers may not capture the full value of the data available to them.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="section-kicker" style="padding:24px 30px 0">Accordion block</div>
+        <h2 style="padding:0 30px 8px; margin:0">Translate each concept into buyer language</h2>
+        <div class="accordion-item open">
+          <button class="accordion-btn" type="button">
+            <div>
+              <strong>Latency</strong><br><span>How a seller should explain it in business terms</span>
+            </div>
+            <div class="accordion-icon">−</div>
+          </button>
+          <div class="accordion-panel">
+            <div class="accordion-panel-inner">Instead of saying “lower round-trip time,” say: <strong>“If your decisioning is slower, you risk losing value at the moment it matters. Faster processing helps you act while the opportunity is still live.”</strong></div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn" type="button">
+            <div>
+              <strong>Infrastructure cost</strong><br><span>Frame cost as an operating issue, not just a technical detail</span>
+            </div>
+            <div class="accordion-icon">+</div>
+          </button>
+          <div class="accordion-panel">
+            <div class="accordion-panel-inner">Instead of saying “cloud spend optimization,” say: <strong>“At scale, architecture choices directly affect margins. Buyers care when infrastructure starts making growth more expensive than it needs to be.”</strong></div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn" type="button">
+            <div>
+              <strong>Signal use</strong><br><span>Keep it focused on decision quality</span>
+            </div>
+            <div class="accordion-icon">+</div>
+          </button>
+          <div class="accordion-panel">
+            <div class="accordion-panel-inner">Instead of saying “closer access to enriched inputs,” say: <strong>“If you can act on better information at the moment of decision, you make smarter choices without adding unnecessary complexity to the workflow.”</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="check">
+        <div class="block-inner knowledge">
+          <div>
+            <div class="section-kicker">Knowledge check</div>
+            <h2>Check learner understanding</h2>
+            <p class="lede">This ungraded check reinforces the core idea before the learner moves on to practice.</p>
+          </div>
+          <div class="question" data-answer="b">
+            <h3>Which response best explains the buyer problem in plain business language?</h3>
+            <div class="options">
+              <label class="option"><input type="radio" name="q1" value="a">The platform uses a distributed container architecture that changes compute orchestration near the bid path.</label>
+              <label class="option"><input type="radio" name="q1" value="b">As scale increases, slower decisioning and inefficient infrastructure can raise cost and reduce the value buyers get from real-time opportunities.</label>
+              <label class="option"><input type="radio" name="q1" value="c">The solution modernizes auction logic with configurable infrastructure primitives for partner environments.</label>
+            </div>
+            <div class="controls">
+              <button class="btn btn-primary" onclick="checkAnswer('q1', this.closest('.question'))">Submit answer</button>
+            </div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="practice">
+        <div class="block-inner">
+          <div class="section-kicker">Performance task</div>
+          <h2>60-second explanation practice</h2>
+          <div class="voice-card">
+            <h3>Prompt</h3>
+            <p>Record a short explanation for a non-technical buyer. Your goal is to explain why latency matters without using heavy jargon.</p>
+            <div class="prompt-box">“Imagine I’m a commercial lead at a DSP. Explain why slower decisioning can become a business problem, and why a different infrastructure model might matter.”</div>
+            <div class="controls">
+              <button class="btn btn-primary" id="recordBtn">Start recording</button>
+              <button class="btn btn-secondary" id="stopBtn" disabled>Stop</button>
+            </div>
+            <div class="recording-status" id="status">Recording is optional in this demo. If your browser allows microphone access, you can capture a short response.</div>
+            <audio id="audioPlayback" controls style="display:none"></audio>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-cta">This sample is designed as a conceptual case study: a compact, microlesson for learning design audiences.</div>
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          const icon = i.querySelector('.accordion-icon');
+          if (icon) icon.textContent = '+';
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          item.querySelector('.accordion-icon').textContent = '−';
+        }
+      });
+    });
+
+    function checkAnswer(name, questionEl){
+      const selected = questionEl.querySelector(`input[name="${name}"]:checked`);
+      const feedback = questionEl.querySelector('.feedback');
+      if(!selected){
+        feedback.className = 'feedback show incorrect';
+        feedback.textContent = 'Select an answer before submitting.';
+        return;
+      }
+      const correct = questionEl.dataset.answer;
+      if(selected.value === correct){
+        feedback.className = 'feedback show correct';
+        feedback.textContent = 'Correct. This response focuses on business impact rather than technical jargon.';
+      } else {
+        feedback.className = 'feedback show incorrect';
+        feedback.textContent = 'Not quite. The strongest answer explains the problem in terms of cost, speed, and business value.';
+      }
+    }
+
+    let mediaRecorder;
+    let audioChunks = [];
+    const recordBtn = document.getElementById('recordBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const statusEl = document.getElementById('status');
+    const audioPlayback = document.getElementById('audioPlayback');
+
+    recordBtn.addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        audioChunks = [];
+        mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          audioPlayback.src = audioUrl;
+          audioPlayback.style.display = 'block';
+          statusEl.textContent = 'Recording captured. Play it back and reflect: did you explain the problem clearly without jargon?';
+          stream.getTracks().forEach(track => track.stop());
+        };
+        mediaRecorder.start();
+        recordBtn.disabled = true;
+        stopBtn.disabled = false;
+        statusEl.textContent = 'Recording... aim for 45–60 seconds.';
+      } catch (err) {
+        statusEl.textContent = 'Microphone access was not available in this browser. The prompt can still be used as a reflective practice activity.';
+      }
+    });
+
+    stopBtn.addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+        recordBtn.disabled = false;
+        stopBtn.disabled = true;
+      }
+    });
+  </script>
+</body>
+</html>
