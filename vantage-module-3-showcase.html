@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vantage SSP — Module 3 Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --surface:#ffffff;
+      --surface-2:#f8fbfe;
+      --text:#132238;
+      --muted:#6c7a90;
+      --border:#dce6f1;
+      --blue:#2f6df6;
+      --blue-dark:#1f56cf;
+      --teal:#3fb9b0;
+      --orange:#ef8d42;
+      --red:#d95c64;
+      --yellow:#fff1bf;
+      --yellow-border:#efd883;
+      --shadow:0 18px 42px rgba(16,40,78,.09);
+      --content:860px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(47,109,246,.10), transparent 24%),
+        radial-gradient(circle at 84% 16%, rgba(239,141,66,.08), transparent 18%),
+        radial-gradient(circle at 84% 72%, rgba(63,185,176,.08), transparent 20%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+    }
+    .topbar{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter:blur(12px);
+      background:rgba(244,247,251,.78);
+      border-bottom:1px solid rgba(220,230,241,.9);
+    }
+    .topbar-inner{
+      max-width:1100px; margin:0 auto; padding:14px 22px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:-.02em}
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background:linear-gradient(135deg, var(--blue), #7ea8ff);
+      display:grid; place-items:center; color:#fff; font-size:16px; box-shadow:0 8px 18px rgba(47,109,246,.24);
+    }
+    .nav{display:flex; gap:10px; flex-wrap:wrap}
+    .nav a{
+      text-decoration:none; color:#345; font-size:13px; font-weight:700;
+      padding:10px 12px; border-radius:999px;
+    }
+    .nav a:hover{background:#e9f1ff; color:var(--blue)}
+    .page{max-width:1100px; margin:0 auto; padding:28px 20px 70px}
+    .hero{
+      background:linear-gradient(135deg, rgba(255,255,255,.92), rgba(242,247,255,.98));
+      border:1px solid rgba(220,230,241,.95);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      padding:36px 38px;
+      display:grid; grid-template-columns:1.12fr .88fr; gap:26px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:after{
+      content:""; position:absolute; right:-50px; top:-30px; width:230px; height:230px; border-radius:50%;
+      background:radial-gradient(circle, rgba(239,141,66,.14), rgba(239,141,66,0));
+    }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:8px;
+      background:#eaf2ff; color:var(--blue);
+      padding:8px 12px; border-radius:999px;
+      font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em;
+    }
+    h1{margin:16px 0 14px; font-size:46px; line-height:1.02; letter-spacing:-.04em}
+    .hero p{font-size:17px; line-height:1.7; color:var(--muted); max-width:62ch; margin:0}
+    .hero-side{
+      background:linear-gradient(180deg,#fff,#fef9f4);
+      border:1px solid rgba(239,141,66,.14);
+      border-radius:26px; padding:22px;
+      box-shadow:0 16px 32px rgba(47,109,246,.06);
+      align-self:stretch;
+    }
+    .hero-side h3{margin:0 0 10px; font-size:18px}
+    .hero-side p{font-size:14px; margin:0 0 16px}
+    .metric-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+    .metric{padding:14px; border-radius:18px; background:#fff; border:1px solid var(--border)}
+    .metric span{display:block; font-size:11px; text-transform:uppercase; font-weight:800; color:var(--muted); letter-spacing:.06em; margin-bottom:7px}
+    .metric strong{display:block; font-size:20px; letter-spacing:-.03em}
+
+    .lesson{max-width:var(--content); margin:26px auto 0; display:grid; gap:20px}
+    .block{background:var(--surface); border:1px solid var(--border); border-radius:28px; box-shadow:0 12px 28px rgba(19,34,56,.05); overflow:hidden}
+    .block-inner{padding:28px 30px}
+    .section-kicker{margin-bottom:10px; color:var(--blue); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em}
+    h2{margin:0 0 12px; font-size:30px; line-height:1.12; letter-spacing:-.03em}
+    .lede{font-size:16px; line-height:1.75; color:var(--muted); margin:0}
+
+    .statement{background:linear-gradient(135deg, #2f6df6, #ef8d42); color:#fff}
+    .statement .block-inner{padding:30px}
+    .statement h2{font-size:34px; margin-bottom:10px}
+    .statement p{margin:0; font-size:17px; line-height:1.65; color:rgba(255,255,255,.93)}
+
+    .question-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px}
+    .q-card{background:var(--surface-2); border:1px solid var(--border); border-radius:22px; padding:20px}
+    .q-card h3{margin:0 0 10px; font-size:18px}
+    .q-card p{margin:0; color:var(--muted); line-height:1.65; font-size:15px}
+    .q-tag{display:inline-block; margin-bottom:12px; padding:6px 10px; border-radius:999px; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.06em}
+    .q-tag.green{background:#eaf8f2; color:#24654a}
+    .q-tag.orange{background:#fff2e8; color:#9a5821}
+
+    .objection-wrap{display:grid; gap:14px; margin-top:16px}
+    .objection{border:1px solid var(--border); border-radius:22px; overflow:hidden; background:#fff}
+    .objection-head{padding:18px 20px; background:#fbfdff; border-bottom:1px solid var(--border)}
+    .objection-head h3{margin:0 0 6px; font-size:18px}
+    .objection-head p{margin:0; color:var(--muted); font-size:14px; line-height:1.6}
+    .response-grid{display:grid; grid-template-columns:1fr 1fr; gap:0}
+    .response-box{padding:18px 20px}
+    .response-box + .response-box{border-left:1px solid var(--border)}
+    .response-box h4{margin:0 0 8px; font-size:15px}
+    .response-box p{margin:0; color:var(--muted); font-size:14px; line-height:1.65}
+    .bad h4{color:var(--red)}
+    .good h4{color:#24654a}
+
+    .sticky-note{
+      background:var(--yellow); border:1px solid var(--yellow-border); border-radius:20px; padding:18px 18px 16px; position:relative;
+      box-shadow:0 14px 24px rgba(195,170,59,.12); transform:rotate(-1deg); margin-top:18px;
+    }
+    .sticky-note:before{
+      content:"Coaching note"; position:absolute; top:-11px; left:18px;
+      background:#ffd94c; color:#664f00; font-size:11px; font-weight:800; padding:6px 9px;
+      border-radius:999px; text-transform:uppercase; letter-spacing:.06em;
+    }
+    .sticky-note p{margin:10px 0 0; font-size:14px; color:#5b4f20; line-height:1.65}
+
+    .scenario{background:linear-gradient(180deg,#fbfdff,#f5f9ff); border:1px solid var(--border); border-radius:24px; padding:22px; margin-top:16px}
+    .scenario h3{margin:0 0 10px; font-size:20px}
+    .scenario p{margin:0 0 12px; color:var(--muted); line-height:1.7; font-size:15px}
+    .scenario-stage{padding:14px 16px; border-radius:16px; background:#fff; border:1px solid var(--border); margin-top:12px; font-size:14px; color:#445970; line-height:1.65}
+    .scenario-actions{display:grid; gap:10px; margin-top:16px}
+    .scenario-btn{
+      text-align:left; border:1px solid var(--border); background:#fff; border-radius:16px; padding:14px 16px; cursor:pointer; font:inherit; color:#20334b;
+      transition:.2s ease;
+    }
+    .scenario-btn:hover{border-color:#b9cdfd; background:#f6f9ff}
+    .scenario-feedback{margin-top:14px; padding:12px 14px; border-radius:14px; font-size:14px; display:none}
+    .scenario-feedback.show{display:block}
+    .scenario-feedback.good{background:#eaf8f2; color:#205b3b; border:1px solid #bfe5cf}
+    .scenario-feedback.bad{background:#fff1f1; color:#8b2d2d; border:1px solid #efc3c3}
+
+    .drill{background:linear-gradient(180deg,#f8fbff,#eef5ff); border:1px solid #d7e4ff; border-radius:22px; padding:22px}
+    .drill h3{margin:0 0 10px; font-size:18px}
+    .drill p{margin:0 0 14px; font-size:15px; line-height:1.7; color:var(--muted)}
+    textarea{width:100%; min-height:130px; border:1px solid var(--border); border-radius:16px; padding:14px 16px; font:inherit; resize:vertical; background:#fff}
+    .rubric{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:16px}
+    .rubric-card{padding:14px; border-radius:16px; background:#fff; border:1px solid var(--border)}
+    .rubric-card strong{display:block; font-size:14px; margin-bottom:6px}
+    .rubric-card span{display:block; font-size:13px; color:var(--muted); line-height:1.5}
+
+    .footer-cta{text-align:center; padding:18px 10px 6px; color:var(--muted); font-size:14px; line-height:1.6}
+
+    @media (max-width: 900px){
+      .hero,.question-grid,.response-grid,.rubric{grid-template-columns:1fr}
+      .response-box + .response-box{border-left:none; border-top:1px solid var(--border)}
+    }
+    @media (max-width: 680px){
+      .page{padding:18px 14px 60px}
+      .topbar-inner{padding:12px 14px}
+      h1{font-size:38px}
+      .hero,.block-inner,.statement .block-inner{padding:24px 22px}
+      .nav{display:none}
+      .metric-grid{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><div class="logo">V</div> Vantage SSP • Module 3 Showcase</div>
+      <nav class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#discovery">Discovery</a>
+        <a href="#objections">Objections</a>
+        <a href="#scenario">Scenario</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero" id="overview">
+      <div>
+        <div class="eyebrow">Rise-inspired microlearning piece</div>
+        <h1>Discovery and objection handling</h1>
+        <p>This module shifts from understanding the solution to guiding the conversation. It helps sellers ask sharper discovery questions, surface the buyer's real pain, and respond to common resistance without sounding defensive, overly technical, or rehearsed.</p>
+      </div>
+      <aside class="hero-side">
+        <h3>Instructional intent</h3>
+        <p>The lesson combines question design, worked examples, and a lightweight branching scenario. The goal is to build judgment, not just memorized scripts.</p>
+        <div class="metric-grid">
+          <div class="metric"><span>Format</span><strong>Microlearning</strong></div>
+          <div class="metric"><span>Estimated time</span><strong>10–12 min</strong></div>
+          <div class="metric"><span>Focus skill</span><strong>Conversation design</strong></div>
+          <div class="metric"><span>Assessment</span><strong>Scenario + written drill</strong></div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="lesson">
+      <section class="block statement">
+        <div class="block-inner">
+          <h2>Good sellers do not rush to explain the platform.</h2>
+          <p>They first help the buyer articulate the operating problem, then respond to objections in a way that acknowledges concern, reframes value, and keeps the conversation moving productively.</p>
+        </div>
+      </section>
+
+      <section class="block" id="discovery">
+        <div class="block-inner">
+          <div class="section-kicker">Lesson objective</div>
+          <h2>By the end of this lesson, the learner can ask high-yield discovery questions and handle common objections with more confidence.</h2>
+          <p class="lede">This lesson keeps the skill set tight: uncover pressure points, avoid weak questions, and respond in a consultative way rather than jumping into a technical monologue.</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-inner">
+          <div class="section-kicker">Question design</div>
+          <h2>What strong discovery questions sound like</h2>
+          <p class="lede">High-value questions surface consequences, trade-offs, and urgency. Low-value questions often invite generic answers and stall the conversation.</p>
+          <div class="question-grid">
+            <div class="q-card">
+              <div class="q-tag green">High-yield</div>
+              <h3>Where do infrastructure decisions start to create commercial pressure for your team?</h3>
+              <p>This works because it invites the buyer to connect technical setup to margin, scale, or workflow pain.</p>
+            </div>
+            <div class="q-card">
+              <div class="q-tag green">High-yield</div>
+              <h3>As you scale, what becomes harder: speed, cost control, or using data effectively in the moment?</h3>
+              <p>This works because it guides the buyer toward the three core problem areas without forcing a yes/no answer.</p>
+            </div>
+            <div class="q-card">
+              <div class="q-tag orange">Weak</div>
+              <h3>Are you happy with your current setup?</h3>
+              <p>This often leads to a shallow response and does not reveal where friction or dissatisfaction actually lives.</p>
+            </div>
+            <div class="q-card">
+              <div class="q-tag orange">Weak</div>
+              <h3>Do you want a better infrastructure model?</h3>
+              <p>This sounds self-serving and pushes the solution before the buyer has described their own problem.</p>
+            </div>
+          </div>
+          <div class="sticky-note">
+            <p><strong>Coaching note:</strong> Good discovery questions do not ask buyers to validate your pitch. They help buyers describe how the problem shows up in their own business.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="objections">
+        <div class="block-inner">
+          <div class="section-kicker">Worked examples</div>
+          <h2>Respond to objections without becoming defensive</h2>
+          <p class="lede">A useful objection response usually does three things: acknowledge the concern, reframe the issue, and bring the conversation back to impact.</p>
+          <div class="objection-wrap">
+            <div class="objection">
+              <div class="objection-head">
+                <h3>“We already have an infrastructure setup that works.”</h3>
+                <p>The buyer is not saying no yet. They are signaling that switching cost or perceived disruption may be higher than perceived benefit.</p>
+              </div>
+              <div class="response-grid">
+                <div class="response-box bad">
+                  <h4>Less effective response</h4>
+                  <p>“Our model is better and more modern, so you should really consider replacing what you have.”</p>
+                </div>
+                <div class="response-box good">
+                  <h4>More effective response</h4>
+                  <p>“That makes sense. The question usually is not whether the current model works at all, but whether it is the most efficient way to support scale, speed, and data use as the business grows.”</p>
+                </div>
+              </div>
+            </div>
+            <div class="objection">
+              <div class="objection-head">
+                <h3>“This sounds too technical for us to prioritize right now.”</h3>
+                <p>The buyer may be deprioritizing the topic, or they may not yet see how the technical model affects business results.</p>
+              </div>
+              <div class="response-grid">
+                <div class="response-box bad">
+                  <h4>Less effective response</h4>
+                  <p>“Let me explain the architecture in more detail so you can see why it matters.”</p>
+                </div>
+                <div class="response-box good">
+                  <h4>More effective response</h4>
+                  <p>“Fair point. It only becomes worth prioritizing if it changes something your team cares about, such as response speed, operating cost, or how effectively you can use inputs in real time.”</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="scenario">
+        <div class="block-inner">
+          <div class="section-kicker">Scenario practice</div>
+          <h2>Choose the next best move</h2>
+          <div class="scenario">
+            <h3>Buyer conversation</h3>
+            <p>You are speaking with a director at a DSP. They say: “We are growing quickly, but I am not convinced infrastructure is where I should focus. Plenty of things could affect performance.”</p>
+            <div class="scenario-stage">What should you do next?</div>
+            <div class="scenario-actions">
+              <button class="scenario-btn" data-outcome="bad">Launch into a detailed explanation of how Vantage changes the architecture and why it is technically superior.</button>
+              <button class="scenario-btn" data-outcome="good">Ask where growth is creating the most operational pressure today: response speed, cost efficiency, or the ability to act on useful inputs in real time.</button>
+              <button class="scenario-btn" data-outcome="bad">Say that most buyers eventually realize they need a better infrastructure model and suggest booking a product demo immediately.</button>
+            </div>
+            <div class="scenario-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-inner">
+          <div class="section-kicker">Written drill</div>
+          <h2>Rewrite the objection response</h2>
+          <div class="drill">
+            <h3>Prompt</h3>
+            <p>A buyer says: “We are not looking to change infrastructure right now.” Write a short response that acknowledges the concern, reframes the conversation, and brings the discussion back to business impact.</p>
+            <textarea placeholder="Write your response here..."></textarea>
+            <div class="rubric">
+              <div class="rubric-card"><strong>Acknowledge</strong><span>Did you show that the buyer's concern is reasonable?</span></div>
+              <div class="rubric-card"><strong>Reframe</strong><span>Did you shift from change-for-change's-sake to business relevance?</span></div>
+              <div class="rubric-card"><strong>Business impact</strong><span>Did you mention speed, cost, efficiency, or decision quality?</span></div>
+              <div class="rubric-card"><strong>Tone</strong><span>Did the response stay consultative instead of pushy or defensive?</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-cta">This module rounds out the portfolio series by showing how the experience progresses from knowledge building into buyer-facing conversational skill, using question design, worked examples, and guided practice.</div>
+    </div>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('.scenario-btn');
+    const feedback = document.querySelector('.scenario-feedback');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const outcome = btn.dataset.outcome;
+        if (outcome === 'good') {
+          feedback.className = 'scenario-feedback show good';
+          feedback.textContent = 'Correct. This keeps the conversation in discovery mode and helps the buyer identify where the real business pressure is before you explain the solution.';
+        } else {
+          feedback.className = 'scenario-feedback show bad';
+          feedback.textContent = 'Not the best next move. At this stage, the stronger move is to deepen discovery rather than pushing explanation or demo steps too early.';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vantage SSP — Module 4 Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --surface:#ffffff;
+      --surface-2:#f8fbfe;
+      --text:#132238;
+      --muted:#6c7a90;
+      --border:#dce6f1;
+      --blue:#2f6df6;
+      --blue-dark:#1f56cf;
+      --teal:#3fb9b0;
+      --green:#4ea66d;
+      --purple:#7568f6;
+      --yellow:#fff1bf;
+      --yellow-border:#efd883;
+      --shadow:0 18px 42px rgba(16,40,78,.09);
+      --content:860px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(47,109,246,.10), transparent 24%),
+        radial-gradient(circle at 86% 18%, rgba(117,104,246,.08), transparent 18%),
+        radial-gradient(circle at 82% 74%, rgba(78,166,109,.08), transparent 20%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+    }
+    .topbar{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter:blur(12px);
+      background:rgba(244,247,251,.78);
+      border-bottom:1px solid rgba(220,230,241,.9);
+    }
+    .topbar-inner{
+      max-width:1100px; margin:0 auto; padding:14px 22px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:-.02em}
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background:linear-gradient(135deg, var(--blue), #7ea8ff);
+      display:grid; place-items:center; color:#fff; font-size:16px; box-shadow:0 8px 18px rgba(47,109,246,.24);
+    }
+    .nav{display:flex; gap:10px; flex-wrap:wrap}
+    .nav a{text-decoration:none; color:#345; font-size:13px; font-weight:700; padding:10px 12px; border-radius:999px}
+    .nav a:hover{background:#e9f1ff; color:var(--blue)}
+    .page{max-width:1100px; margin:0 auto; padding:28px 20px 70px}
+    .hero{
+      background:linear-gradient(135deg, rgba(255,255,255,.92), rgba(242,247,255,.98));
+      border:1px solid rgba(220,230,241,.95);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      padding:36px 38px;
+      display:grid; grid-template-columns:1.12fr .88fr; gap:26px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:after{
+      content:""; position:absolute; right:-40px; top:-20px; width:220px; height:220px; border-radius:50%;
+      background:radial-gradient(circle, rgba(78,166,109,.14), rgba(78,166,109,0));
+    }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:8px;
+      background:#eaf2ff; color:var(--blue);
+      padding:8px 12px; border-radius:999px;
+      font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em;
+    }
+    h1{margin:16px 0 14px; font-size:46px; line-height:1.02; letter-spacing:-.04em}
+    .hero p{font-size:17px; line-height:1.7; color:var(--muted); max-width:62ch; margin:0}
+    .hero-side{
+      background:linear-gradient(180deg,#fff,#f6fbf7);
+      border:1px solid rgba(78,166,109,.14);
+      border-radius:26px; padding:22px;
+      box-shadow:0 16px 32px rgba(47,109,246,.06);
+      align-self:stretch;
+    }
+    .hero-side h3{margin:0 0 10px; font-size:18px}
+    .hero-side p{font-size:14px; margin:0 0 16px}
+    .metric-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+    .metric{padding:14px; border-radius:18px; background:#fff; border:1px solid var(--border)}
+    .metric span{display:block; font-size:11px; text-transform:uppercase; font-weight:800; color:var(--muted); letter-spacing:.06em; margin-bottom:7px}
+    .metric strong{display:block; font-size:20px; letter-spacing:-.03em}
+
+    .lesson{max-width:var(--content); margin:26px auto 0; display:grid; gap:20px}
+    .block{background:var(--surface); border:1px solid var(--border); border-radius:28px; box-shadow:0 12px 28px rgba(19,34,56,.05); overflow:hidden}
+    .block-inner{padding:28px 30px}
+    .section-kicker{margin-bottom:10px; color:var(--blue); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em}
+    h2{margin:0 0 12px; font-size:30px; line-height:1.12; letter-spacing:-.03em}
+    .lede{font-size:16px; line-height:1.75; color:var(--muted); margin:0}
+
+    .statement{background:linear-gradient(135deg, #2f6df6, #4ea66d); color:#fff}
+    .statement .block-inner{padding:30px}
+    .statement h2{font-size:34px; margin-bottom:10px}
+    .statement p{margin:0; font-size:17px; line-height:1.65; color:rgba(255,255,255,.93)}
+
+    .decision-shell{margin-top:18px; background:linear-gradient(180deg,#fbfdff,#f5f9ff); border:1px solid var(--border); border-radius:24px; padding:22px}
+    .decision-start{padding:16px 18px; background:#fff; border:1px solid var(--border); border-radius:18px; font-size:15px; color:#314760; line-height:1.65}
+    .decision-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px}
+    .decision-card{border:1px solid var(--border); border-radius:22px; background:#fff; padding:20px}
+    .decision-card.good{background:linear-gradient(180deg,#f6fcf8,#ffffff)}
+    .decision-card.caution{background:linear-gradient(180deg,#fffaf4,#ffffff)}
+    .decision-card h3{margin:0 0 10px; font-size:19px}
+    .decision-card p{margin:0 0 14px; color:var(--muted); font-size:15px; line-height:1.7}
+    .badge{display:inline-block; padding:6px 10px; border-radius:999px; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; margin-bottom:12px}
+    .badge.green{background:#eaf8f2; color:#24654a}
+    .badge.orange{background:#fff2e8; color:#9a5821}
+    .criteria{display:grid; gap:10px}
+    .criteria div{padding:12px 14px; border:1px solid var(--border); border-radius:14px; font-size:14px; color:#445970; background:#fff}
+
+    .triage-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px}
+    .triage-card{background:var(--surface-2); border:1px solid var(--border); border-radius:22px; padding:20px}
+    .triage-card h3{margin:0 0 10px; font-size:18px}
+    .triage-card p{margin:0; color:var(--muted); line-height:1.65; font-size:15px}
+
+    .sticky-note{
+      background:var(--yellow); border:1px solid var(--yellow-border); border-radius:20px; padding:18px 18px 16px; position:relative;
+      box-shadow:0 14px 24px rgba(195,170,59,.12); transform:rotate(-1deg); margin-top:18px;
+    }
+    .sticky-note:before{
+      content:"Escalation note"; position:absolute; top:-11px; left:18px;
+      background:#ffd94c; color:#664f00; font-size:11px; font-weight:800; padding:6px 9px;
+      border-radius:999px; text-transform:uppercase; letter-spacing:.06em;
+    }
+    .sticky-note p{margin:10px 0 0; font-size:14px; color:#5b4f20; line-height:1.65}
+
+    .sort-grid{display:grid; gap:14px; margin-top:16px}
+    .sort-item{border:1px solid var(--border); border-radius:20px; background:#fbfdff; padding:20px}
+    .sort-item h3{margin:0 0 8px; font-size:18px}
+    .sort-item p{margin:0 0 12px; color:var(--muted); font-size:15px; line-height:1.65}
+    .choices{display:grid; gap:10px}
+    .choice{display:flex; gap:12px; align-items:flex-start; padding:13px 15px; border:1px solid var(--border); border-radius:16px; cursor:pointer; background:#fff; transition:.2s ease}
+    .choice:hover{border-color:#b9cdfd; background:#f6f9ff}
+    .feedback{margin-top:12px; padding:12px 14px; border-radius:14px; font-size:14px; display:none}
+    .feedback.show{display:block}
+    .feedback.correct{background:#eaf8f2; color:#205b3b; border:1px solid #bfe5cf}
+    .feedback.incorrect{background:#fff1f1; color:#8b2d2d; border:1px solid #efc3c3}
+    .btn{border:none; cursor:pointer; border-radius:999px; padding:12px 16px; font-weight:700; font-size:14px}
+    .btn-primary{background:var(--blue); color:#fff}
+    .btn-primary:hover{background:var(--blue-dark)}
+
+    .handoff{background:linear-gradient(180deg,#f8fbff,#eef5ff); border:1px solid #d7e4ff; border-radius:22px; padding:22px}
+    .handoff h3{margin:0 0 10px; font-size:18px}
+    .handoff p{margin:0 0 14px; font-size:15px; line-height:1.7; color:var(--muted)}
+    .template{display:grid; gap:10px; margin-top:14px}
+    .template-line{padding:14px 16px; border-radius:16px; background:#fff; border:1px solid var(--border); font-size:14px; line-height:1.65; color:#39506e}
+    textarea{width:100%; min-height:120px; border:1px solid var(--border); border-radius:16px; padding:14px 16px; font:inherit; resize:vertical; background:#fff; margin-top:14px}
+    .helper{margin-top:10px; font-size:13px; color:var(--muted)}
+
+    .footer-cta{text-align:center; padding:18px 10px 6px; color:var(--muted); font-size:14px; line-height:1.6}
+
+    @media (max-width: 900px){
+      .hero,.decision-grid,.triage-grid{grid-template-columns:1fr}
+    }
+    @media (max-width: 680px){
+      .page{padding:18px 14px 60px}
+      .topbar-inner{padding:12px 14px}
+      h1{font-size:38px}
+      .hero,.block-inner,.statement .block-inner{padding:24px 22px}
+      .nav{display:none}
+      .metric-grid{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><div class="logo">V</div> Vantage SSP • Module 4 Showcase</div>
+      <nav class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#decision">Decision guide</a>
+        <a href="#triage">Triage</a>
+        <a href="#handoff">SE handoff</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero" id="overview">
+      <div>
+        <div class="eyebrow">Rise-inspired microlearning piece</div>
+        <h1>When to involve solutions engineering</h1>
+        <p>This module helps sellers recognize the boundary between a strong commercial conversation and a deeper technical discussion. The aim is to build confidence in triaging questions, involving the right partner at the right time, and positioning the handoff as strategic rather than reactive.</p>
+      </div>
+      <aside class="hero-side">
+        <h3>Instructional intent</h3>
+        <p>The design uses a decision framework, question triage, and a concise handoff template. It teaches judgment and role clarity, not technical overreach.</p>
+        <div class="metric-grid">
+          <div class="metric"><span>Format</span><strong>Microlearning</strong></div>
+          <div class="metric"><span>Estimated time</span><strong>8–10 min</strong></div>
+          <div class="metric"><span>Focus skill</span><strong>Triage</strong></div>
+          <div class="metric"><span>Assessment</span><strong>Classification + draft</strong></div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="lesson">
+      <section class="block statement">
+        <div class="block-inner">
+          <h2>Involving solutions engineering is not a sign of weakness.</h2>
+          <p>It is a sign of good judgment when the conversation moves from value framing into architecture, implementation complexity, or technical feasibility that deserves deeper expertise.</p>
+        </div>
+      </section>
+
+      <section class="block" id="decision">
+        <div class="block-inner">
+          <div class="section-kicker">Lesson objective</div>
+          <h2>By the end of this lesson, the learner can identify when to answer directly and when to bring in solutions engineering.</h2>
+          <p class="lede">The design intent is simple: protect credibility, reduce guesswork, and make escalation feel structured rather than improvised.</p>
+          <div class="decision-shell">
+            <div class="decision-start">Start with one question: <strong>Is the buyer asking for business understanding, or are they now asking for technical validation and implementation depth?</strong></div>
+            <div class="decision-grid">
+              <div class="decision-card good">
+                <div class="badge green">Seller can lead</div>
+                <h3>Stay in the commercial conversation</h3>
+                <p>The seller should continue when the buyer is still clarifying priorities, outcomes, trade-offs, stakeholder concerns, or the value of changing the operating model.</p>
+                <div class="criteria">
+                  <div>The buyer is asking what the platform changes commercially.</div>
+                  <div>The buyer wants clearer examples, positioning, or business impact.</div>
+                  <div>The discussion is still about whether this matters, not exactly how it would be implemented.</div>
+                </div>
+              </div>
+              <div class="decision-card caution">
+                <div class="badge orange">Bring in SE</div>
+                <h3>Shift to technical support</h3>
+                <p>Solutions engineering should join when the buyer wants implementation detail, validation of feasibility, or specific architecture-level answers that shape evaluation risk.</p>
+                <div class="criteria">
+                  <div>The buyer is asking how the model would fit into their current environment.</div>
+                  <div>The conversation turns to deployment steps, migration questions, or technical constraints.</div>
+                  <div>The seller would otherwise be forced to guess, oversimplify, or over-promise.</div>
+                </div>
+              </div>
+            </div>
+            <div class="sticky-note">
+              <p><strong>Escalation note:</strong> The goal is not to delay every technical question. It is to involve SE when precision matters enough that credibility, fit, or implementation confidence depends on a stronger technical answer.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="triage">
+        <div class="block-inner">
+          <div class="section-kicker">Triage examples</div>
+          <h2>Questions sellers can answer vs. questions that need SE</h2>
+          <p class="lede">The best way to build this judgment is to compare examples and look for the pattern.</p>
+          <div class="triage-grid">
+            <div class="triage-card">
+              <h3>Usually seller-owned</h3>
+              <p>“Why does this matter for cost efficiency?”</p>
+              <p>“How should I think about the value compared with our current model?”</p>
+              <p>“Which stakeholder teams usually care most about this change?”</p>
+            </div>
+            <div class="triage-card">
+              <h3>Usually SE-owned</h3>
+              <p>“How would this fit into our existing infrastructure stack?”</p>
+              <p>“What would migration require for our team?”</p>
+              <p>“How would you validate performance and feasibility in our environment?”</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-inner">
+          <div class="section-kicker">Classification check</div>
+          <h2>Choose the right owner for each question</h2>
+          <div class="sort-grid">
+            <div class="sort-item" data-answer="b">
+              <h3>Question 1</h3>
+              <p>“What changes in business terms if we move to a different infrastructure model?”</p>
+              <div class="choices">
+                <label class="choice"><input type="radio" name="q4a" value="a">Bring in solutions engineering now.</label>
+                <label class="choice"><input type="radio" name="q4a" value="b">Seller can answer and keep the conversation commercial.</label>
+              </div>
+              <div style="margin-top:12px"><button class="btn btn-primary" onclick="checkAnswer('q4a', this.closest('.sort-item'))">Submit answer</button></div>
+              <div class="feedback"></div>
+            </div>
+            <div class="sort-item" data-answer="a">
+              <h3>Question 2</h3>
+              <p>“How would this integrate with our current deployment approach and what would the implementation path look like?”</p>
+              <div class="choices">
+                <label class="choice"><input type="radio" name="q4b" value="a">Bring in solutions engineering now.</label>
+                <label class="choice"><input type="radio" name="q4b" value="b">Seller can answer and keep the conversation commercial.</label>
+              </div>
+              <div style="margin-top:12px"><button class="btn btn-primary" onclick="checkAnswer('q4b', this.closest('.sort-item'))">Submit answer</button></div>
+              <div class="feedback"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="handoff">
+        <div class="block-inner">
+          <div class="section-kicker">Handoff template</div>
+          <h2>How to bring in SE without losing momentum</h2>
+          <div class="handoff">
+            <h3>Three-part handoff structure</h3>
+            <p>A good handoff keeps the buyer confident. It shows that the conversation is progressing, not being handed off because the seller got stuck.</p>
+            <div class="template">
+              <div class="template-line"><strong>1. Validate the question</strong><br>“That is exactly the right question to ask once we move from value into fit and feasibility.”</div>
+              <div class="template-line"><strong>2. Position SE strategically</strong><br>“I would like to bring in one of our solutions engineering partners so we can give you a more precise view of how this would work in your environment.”</div>
+              <div class="template-line"><strong>3. Keep the thread connected</strong><br>“I will brief them on the priorities you have already shared around speed, cost pressure, and implementation risk so the next conversation stays focused.”</div>
+            </div>
+            <textarea placeholder="Draft your own 3-sentence SE handoff here..."></textarea>
+            <div class="helper">Self-check: Did the handoff make SE sound strategic? Did you connect the handoff to the buyer's priorities rather than just saying the question was too technical?</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-cta">This module adds role clarity and escalation judgment to the portfolio series, showing how the learning experience supports sellers not just in messaging, but in navigating complex buying conversations responsibly.</div>
+    </div>
+  </main>
+
+  <script>
+    function checkAnswer(name, questionEl){
+      const selected = questionEl.querySelector(`input[name="${name}"]:checked`);
+      const feedback = questionEl.querySelector('.feedback');
+      if(!selected){
+        feedback.className = 'feedback show incorrect';
+        feedback.textContent = 'Select an answer before submitting.';
+        return;
+      }
+      const correct = questionEl.dataset.answer;
+      if(selected.value === correct){
+        feedback.className = 'feedback show correct';
+        feedback.textContent = 'Correct. This choice reflects the right boundary between commercial conversation and technical validation.';
+      } else {
+        feedback.className = 'feedback show incorrect';
+        feedback.textContent = 'Not quite. Revisit whether the buyer is asking for business understanding or implementation-level precision.';
+      }
+    }
+  </script>
+</body>
+</html>
