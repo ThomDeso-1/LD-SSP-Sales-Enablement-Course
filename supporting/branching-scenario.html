@@ -34,7 +34,7 @@
       --radius-lg: 20px;
       --radius-md: 16px;
       --max: 1240px;
-      --sidebar: 330px;
+      --sidebar: clamp(320px, 28vw, 380px);
       --progress: 33;
     }
     * { box-sizing: border-box; }
@@ -54,11 +54,24 @@
     h3 { font-size: 1.05rem; }
     p { margin: 0; }
     button { font: inherit; }
-    .shell { width: min(calc(100% - 20px), var(--max)); margin: 18px auto 40px; display: grid; grid-template-columns: var(--sidebar) minmax(0,1fr); gap: 18px; }
+    .shell {
+  width: min(calc(100% - 24px), var(--max));
+  margin: 18px auto 40px;
+  display: grid;
+  grid-template-columns: minmax(300px, var(--sidebar)) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  }
     .panel {
       background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); box-shadow: var(--shadow); backdrop-filter: blur(18px);
     }
-    .sidebar { padding: 22px; position: sticky; top: 18px; height: fit-content; }
+    .sidebar {
+    padding: 22px;
+    position: sticky;
+    top: 18px;
+    align-self: start;
+    height: auto;
+    }
     .brand { display:flex; gap:12px; align-items:center; }
     .logo {
       width: 46px; height: 46px; border-radius: 16px; background: linear-gradient(135deg, var(--blue), var(--purple));
@@ -74,18 +87,49 @@
     .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 6px rgba(47,125,246,0.08); }
     .sidebar p { color: var(--muted); margin-top: 12px; }
     .progress-card {
-      margin-top: 18px; padding: 16px; background: linear-gradient(180deg, #fff, #f9fbff); border: 1px solid var(--border); border-radius: var(--radius-lg);
-      display:grid; gap:12px;
+      margin-top: 18px;
+      padding: 16px;
+      background: linear-gradient(180deg, #fff, #f9fbff);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      display: grid;
+      gap: 12px;
+      min-width: 0;
     }
-    .progress-row { display:flex; justify-content:space-between; align-items:center; color: var(--muted); font-size: 0.9rem; }
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .progress-row strong,
+    .progress-row span {
+      min-width: 0;
+    }
+
+    .progress-row span {
+      text-align: right;
+    }
     .progress-track { height: 10px; border-radius: 999px; background: #e8f0ff; overflow: hidden; }
     .progress-fill { height: 100%; width: calc(var(--progress) * 1%); background: linear-gradient(90deg, var(--blue), var(--purple)); transition: width 280ms ease; }
-    .metric-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top: 16px; }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
     .metric {
-      background: #fff; border:1px solid var(--border); border-radius: 16px; padding: 12px; text-align:center;
+    min-width: 0;
     }
     .metric .n { font-size: 1.15rem; font-weight: 800; }
-    .metric .t { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--faint); margin-top: 4px; }
+    .metric .t {
+    font-size: 0.68rem;
+    line-height: 1.2;
+    word-break: break-word;
+  }
     .learning-panel {
       margin-top: 18px; padding: 16px; border-radius: var(--radius-lg); background: linear-gradient(180deg, #f8fbff, #f6f3ff); border: 1px solid var(--border);
     }
@@ -192,8 +236,12 @@
       .shell { grid-template-columns: 1fr; }
       .sidebar { position: relative; top: 0; }
     }
+    @media (min-width: 1280px) {
+  .metric-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
     @media (max-width: 880px) {
-      .hero-grid, .call-layout, .call-grid, .summary-grid, .metric-grid, .score-row { grid-template-columns: 1fr; }
+      .hero-grid, .call-layout, .call-grid, .summary-grid, .score-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .shell { width: min(calc(100% - 12px), var(--max)); margin-top: 10px; }
