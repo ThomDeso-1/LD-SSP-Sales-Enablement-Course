@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Discovery Call Scenario</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f7ff;
+      --surface: rgba(255,255,255,0.84);
+      --surface-2: #f8fbff;
+      --card: #ffffff;
+      --border: #dbe5fb;
+      --divider: #e8eefc;
+      --text: #17233b;
+      --muted: #60708d;
+      --faint: #8d9cb8;
+      --blue: #2f7df6;
+      --blue-2: #eaf3ff;
+      --blue-3: #d9e9ff;
+      --green: #0f8f69;
+      --green-2: #edfdf6;
+      --amber: #a56c00;
+      --amber-2: #fff8ea;
+      --red: #b34747;
+      --red-2: #fff3f3;
+      --purple: #6f6cff;
+      --shadow: 0 18px 55px rgba(45, 85, 166, 0.12);
+      --shadow-sm: 0 8px 24px rgba(45, 85, 166, 0.08);
+      --radius-xl: 26px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --max: 1240px;
+      --sidebar: 330px;
+      --progress: 33;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(47,125,246,0.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(111,108,255,0.12), transparent 20%),
+        linear-gradient(180deg, #f8fbff 0%, #f4f7ff 100%);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 { font-family: Manrope, Inter, sans-serif; letter-spacing: -0.03em; margin: 0; }
+    h1 { font-size: clamp(2rem, 1.3rem + 2.2vw, 3.7rem); line-height: 1.03; }
+    h2 { font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.85rem); }
+    h3 { font-size: 1.05rem; }
+    p { margin: 0; }
+    button { font: inherit; }
+    .shell { width: min(calc(100% - 20px), var(--max)); margin: 18px auto 40px; display: grid; grid-template-columns: var(--sidebar) minmax(0,1fr); gap: 18px; }
+    .panel {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); box-shadow: var(--shadow); backdrop-filter: blur(18px);
+    }
+    .sidebar { padding: 22px; position: sticky; top: 18px; height: fit-content; }
+    .brand { display:flex; gap:12px; align-items:center; }
+    .logo {
+      width: 46px; height: 46px; border-radius: 16px; background: linear-gradient(135deg, var(--blue), var(--purple));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 12px 24px rgba(47,125,246,0.22); position: relative;
+    }
+    .logo::before, .logo::after { content:""; position:absolute; background:#fff; border-radius:999px; }
+    .logo::before { width: 20px; height: 3px; left: 13px; top: 21px; }
+    .logo::after { width: 3px; height: 20px; left: 21px; top: 13px; }
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:8px; margin-top: 18px; padding: 8px 12px; border-radius: 999px; background: var(--blue-2); color: var(--blue);
+      font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;
+    }
+    .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 6px rgba(47,125,246,0.08); }
+    .sidebar p { color: var(--muted); margin-top: 12px; }
+    .progress-card {
+      margin-top: 18px; padding: 16px; background: linear-gradient(180deg, #fff, #f9fbff); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      display:grid; gap:12px;
+    }
+    .progress-row { display:flex; justify-content:space-between; align-items:center; color: var(--muted); font-size: 0.9rem; }
+    .progress-track { height: 10px; border-radius: 999px; background: #e8f0ff; overflow: hidden; }
+    .progress-fill { height: 100%; width: calc(var(--progress) * 1%); background: linear-gradient(90deg, var(--blue), var(--purple)); transition: width 280ms ease; }
+    .metric-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top: 16px; }
+    .metric {
+      background: #fff; border:1px solid var(--border); border-radius: 16px; padding: 12px; text-align:center;
+    }
+    .metric .n { font-size: 1.15rem; font-weight: 800; }
+    .metric .t { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--faint); margin-top: 4px; }
+    .learning-panel {
+      margin-top: 18px; padding: 16px; border-radius: var(--radius-lg); background: linear-gradient(180deg, #f8fbff, #f6f3ff); border: 1px solid var(--border);
+    }
+    .learning-panel ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); display:grid; gap:8px; }
+    .main { display:grid; gap: 18px; }
+    .hero { padding: 26px; display:grid; gap: 16px; }
+    .hero-top { display:flex; justify-content:space-between; gap:16px; align-items:start; }
+    .hero p { color: var(--muted); max-width: 68ch; }
+    .hero-grid { display:grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; }
+    .call-preview {
+      background: linear-gradient(180deg, #ffffff, #f7faff); border:1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; box-shadow: var(--shadow-sm);
+    }
+    .chip-row { display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
+    .chip { padding: 7px 10px; border-radius: 999px; background: var(--blue-2); color: var(--blue); font-size: 0.78rem; font-weight: 700; }
+    .call-layout { display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; }
+    .stage { padding: 22px; display:grid; gap: 18px; }
+    .call-window {
+      background: linear-gradient(180deg, #f7fbff, #ffffff); border:1px solid var(--border); border-radius: var(--radius-lg); overflow:hidden;
+    }
+    .window-top {
+      display:flex; justify-content:space-between; align-items:center; padding: 14px 18px; border-bottom:1px solid var(--divider); background: rgba(248,251,255,0.8);
+    }
+    .dots { display:flex; gap: 6px; }
+    .dots span { width: 9px; height: 9px; border-radius: 50%; background: #c8d9ff; }
+    .call-grid { display:grid; grid-template-columns: 1.15fr 0.85fr; gap: 14px; padding: 16px; }
+    .publisher-card, .rep-card {
+      border:1px solid var(--border); border-radius: 18px; padding: 16px; background: #fff;
+    }
+    .publisher-card { background: linear-gradient(180deg, #ffffff, #f9fbff); }
+    .rep-card { background: linear-gradient(180deg, #f9fbff, #f5f8ff); }
+    .avatar-row { display:flex; gap:12px; align-items:center; margin-bottom: 12px; }
+    .avatar {
+      width: 48px; height: 48px; border-radius: 16px; display:grid; place-items:center; font-weight: 800; color:#fff;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+    }
+    .avatar.publisher { background: linear-gradient(135deg, #556987, #8aa0bf); }
+    .meta { color: var(--faint); font-size: 0.84rem; }
+    .speech {
+      padding: 14px 16px; border-radius: 16px; background: #f7faff; color: var(--text); border: 1px solid var(--border);
+    }
+    .speech + .speech { margin-top: 10px; }
+    .decision-panel { padding: 18px; display:grid; gap: 14px; }
+    .decision-header {
+      display:flex; justify-content:space-between; gap:14px; align-items:center;
+    }
+    .step-pill { padding: 7px 10px; border-radius: 999px; background: var(--blue-2); color: var(--blue); font-size: 0.78rem; font-weight: 800; }
+    .decision-grid { display:grid; gap: 12px; }
+    .decision {
+      text-align:left; width: 100%; border:1px solid var(--border); background: linear-gradient(180deg, #fff, #fafcff);
+      border-radius: 18px; padding: 16px; cursor:pointer; transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+    .decision:hover { transform: translateY(-2px); border-color: #c7d8ff; box-shadow: var(--shadow-sm); }
+    .decision small { display:block; color: var(--faint); margin-top: 6px; }
+    .feedback-wrap { display:grid; gap: 12px; }
+    .feedback {
+      display:none; border-radius: 18px; padding: 16px; border:1px solid var(--border); background: #f9fbff;
+    }
+    .feedback.show { display:grid; gap: 8px; animation: fadeUp 240ms ease; }
+    .feedback.good { background: var(--green-2); border-color: #cceedd; }
+    .feedback.warn { background: var(--amber-2); border-color: #f0dfbe; }
+    .feedback.bad { background: var(--red-2); border-color: #f0d0d0; }
+    .coach {
+      padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,0.72); border: 1px dashed #c7d8ff; color: var(--muted);
+    }
+    .pathway {
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .badge {
+      padding: 7px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .badge.good { background: #dcf8ec; color: var(--green); }
+    .badge.warn { background: #fff0cc; color: var(--amber); }
+    .badge.bad { background: #ffe1e1; color: var(--red); }
+    .side-stack { display:grid; gap: 18px; }
+    .outcome-card, .path-card {
+      padding: 18px; border-radius: var(--radius-lg); border:1px solid var(--border); background: linear-gradient(180deg, #fff, #fafcff); box-shadow: var(--shadow-sm);
+    }
+    .path-list { display:grid; gap: 10px; margin-top: 12px; }
+    .path-item {
+      padding: 12px 14px; border-radius: 14px; background: #fff; border:1px solid var(--border); display:flex; justify-content:space-between; gap:10px; align-items:center;
+    }
+    .outcome-card p, .path-card p { color: var(--muted); }
+    .score-row { display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top: 12px; }
+    .score-box { border:1px solid var(--border); background:#fff; border-radius: 16px; padding: 14px; text-align:center; }
+    .score-box .v { font-size: 1.1rem; font-weight: 800; }
+    .score-box .l { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); margin-top: 4px; }
+    .restart {
+      margin-top: 12px; width:100%; border:none; background: linear-gradient(90deg, var(--blue), var(--purple)); color:#fff; padding: 14px 16px; border-radius: 16px; cursor:pointer; font-weight: 700;
+      box-shadow: 0 12px 24px rgba(47,125,246,0.2);
+    }
+    .summary {
+      padding: 20px; display:grid; gap: 14px;
+    }
+    .summary-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
+    .mini {
+      border:1px solid var(--border); border-radius: 18px; background:#fff; padding: 16px;
+    }
+    .mini p { color: var(--muted); margin-top: 8px; font-size: 0.94rem; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 1100px) {
+      .shell { grid-template-columns: 1fr; }
+      .sidebar { position: relative; top: 0; }
+    }
+    @media (max-width: 880px) {
+      .hero-grid, .call-layout, .call-grid, .summary-grid, .metric-grid, .score-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .shell { width: min(calc(100% - 12px), var(--max)); margin-top: 10px; }
+      .sidebar, .hero, .stage, .summary { padding: 18px; }
+      .panel { border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar panel">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-weight:800;">Branching Scenario Prototype</div>
+          <div class="meta">Consultative sales simulation</div>
+        </div>
+      </div>
+      <div class="eyebrow"><i></i> Discovery call simulation</div>
+      <p>A new ad tech rep is speaking with a publisher about whether a cloud-based SSP approach is a strong fit. The learner must ask strong questions, diagnose business friction, and position value in a commercially relevant way.</p>
+
+      <div class="progress-card">
+        <div class="progress-row">
+          <strong>Scenario progress</strong>
+          <span id="progressText">Step 1 of 3</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="metric-grid">
+          <div class="metric"><div class="n" id="scoreConsultative">0</div><div class="t">Consultative</div></div>
+          <div class="metric"><div class="n" id="scoreDiagnosis">0</div><div class="t">Diagnosis</div></div>
+          <div class="metric"><div class="n" id="scorePositioning">0</div><div class="t">Positioning</div></div>
+        </div>
+      </div>
+
+      <div class="learning-panel">
+        <h3>What this interaction demonstrates</h3>
+        <ul>
+          <li>Scenario-based learning through realistic choices and consequences.</li>
+          <li>Consultative sales behavior using discovery questions that uncover pain, impact, and urgency.</li>
+          <li>Immediate coaching feedback to support learning transfer and reflection.</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="hero panel">
+        <div class="hero-top">
+          <div>
+            <h1>Cloud fit discovery call</h1>
+            <p>A portfolio-quality branching scenario prototype designed like a modern Storyline or Rise interaction. The learner practices opening discovery, diagnosing monetization challenges, and positioning SSP value to a publisher in a simulated video call environment.</p>
+          </div>
+        </div>
+        <div class="hero-grid">
+          <div class="call-preview">
+            <h3>Learning objectives</h3>
+            <div class="chip-row">
+              <span class="chip">Discovery questioning</span>
+              <span class="chip">Business diagnosis</span>
+              <span class="chip">Value positioning</span>
+            </div>
+            <p style="margin-top:12px; color:var(--muted);">Strong pathways reward curiosity, relevance, and clear business framing. Weak pathways show what happens when a rep rushes to pitch features or fails to uncover the publisher’s actual friction.</p>
+          </div>
+          <div class="call-preview">
+            <h3>Success state</h3>
+            <p style="color:var(--muted); margin-top:8px;">The best outcome is not “the publisher buys immediately.” It is that the rep earns the right to a deeper conversation by demonstrating understanding, diagnosing current challenges, and positioning the SSP in language the publisher cares about.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="call-layout">
+        <div class="stage panel">
+          <div class="call-window">
+            <div class="window-top">
+              <div style="font-weight:800;">Simulated discovery call</div>
+              <div class="dots"><span></span><span></span><span></span></div>
+            </div>
+            <div class="call-grid">
+              <div class="publisher-card">
+                <div class="avatar-row">
+                  <div class="avatar publisher">LP</div>
+                  <div>
+                    <strong>Lauren Rutledge</strong>
+                    <div class="meta">VP, Revenue Operations · Mid-market publisher</div>
+                  </div>
+                </div>
+                <div class="speech" id="publisherSpeech">“Thanks for making time. We already run header bidding, so I’m curious why your cloud approach would be worth discussing.”</div>
+              </div>
+              <div class="rep-card">
+                <div class="avatar-row">
+                  <div class="avatar">SR</div>
+                  <div>
+                    <strong>You</strong>
+                    <div class="meta">New ad tech sales rep</div>
+                  </div>
+                </div>
+                <div class="speech" id="repPrompt">Your first move should establish relevance without jumping into a product monologue.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="decision-panel">
+            <div class="decision-header">
+              <div>
+                <div class="step-pill" id="stepPill">Decision point 1</div>
+                <h2 id="stepTitle">Opening discovery</h2>
+              </div>
+              <div class="pathway" id="pathwayBadges"></div>
+            </div>
+            <p id="stepDescription" style="color:var(--muted);">Choose how the rep responds to the publisher’s initial skepticism.</p>
+            <div class="decision-grid" id="decisionGrid"></div>
+            <div class="feedback-wrap" id="feedbackWrap"></div>
+          </div>
+        </div>
+
+        <aside class="side-stack">
+          <section class="path-card">
+            <h3>Path tracker</h3>
+            <p>Each choice updates the quality of the conversation path.</p>
+            <div class="path-list" id="pathList">
+              <div class="path-item"><span>Opening discovery</span><strong>Pending</strong></div>
+              <div class="path-item"><span>Diagnosing challenges</span><strong>Pending</strong></div>
+              <div class="path-item"><span>Positioning SSP value</span><strong>Pending</strong></div>
+            </div>
+          </section>
+
+          <section class="outcome-card" id="outcomeCard">
+            <h3>Current call momentum</h3>
+            <p id="outcomeText">The call is still early. Strong questions will build trust and reveal what matters most to the publisher.</p>
+            <div class="score-row">
+              <div class="score-box"><div class="v" id="trustScore">0</div><div class="l">Trust</div></div>
+              <div class="score-box"><div class="v" id="clarityScore">0</div><div class="l">Clarity</div></div>
+              <div class="score-box"><div class="v" id="fitScore">0</div><div class="l">Fit signal</div></div>
+            </div>
+            <button class="restart" id="restartBtn" style="display:none;">Restart scenario</button>
+          </section>
+        </aside>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const steps = [
+      {
+        title: 'Opening discovery',
+        description: 'Choose how the rep responds to the publisher’s initial skepticism.',
+        publisher: '“Thanks for making time. We already run header bidding, so I’m curious why your cloud approach would be worth discussing.”',
+        repPrompt: 'Your first move should establish relevance without jumping into a product monologue.',
+        dimension: 'consultative',
+        choices: [
+          {
+            text: '“That makes sense. Before I explain anything, can I ask where your current setup feels strongest and where it creates the most friction for your team?”',
+            result: 'good',
+            coach: 'Strong opening. It acknowledges the publisher’s current maturity and invites them to describe their environment. Questions that uncover current state and pain are core to consultative discovery.',
+            nextPublisher: '“Fair question. We have decent demand coverage, but latency and partner coordination can get messy.”',
+            scores: { consultative: 2, trust: 2, clarity: 1, fit: 1 }
+          },
+          {
+            text: '“Absolutely. Our platform is built on a modern cloud architecture that gives you a more advanced infrastructure model than most SSPs.”',
+            result: 'warn',
+            coach: 'This sounds polished, but it skips the problem definition. The rep is pitching before understanding the publisher’s needs, which weakens relevance and discovery depth.',
+            nextPublisher: '“Okay, but what problem is that solving for me specifically?”',
+            scores: { consultative: 0, trust: 0, clarity: 0, fit: 0 }
+          },
+          {
+            text: '“If you already have header bidding, you may not be a fit for us yet.”',
+            result: 'bad',
+            coach: 'This closes the conversation before value can be uncovered. Strong discovery asks what is happening now and what the buyer wants to change before disqualifying.',
+            nextPublisher: '“Got it. Then maybe this isn’t a useful conversation.”',
+            scores: { consultative: -1, trust: -2, clarity: -1, fit: -2 }
+          }
+        ]
+      },
+      {
+        title: 'Diagnosing monetization challenges',
+        description: 'The publisher has mentioned friction. Decide how the rep should go deeper.',
+        publisher: '',
+        repPrompt: 'Now the rep needs to move from surface pain to meaningful diagnosis.',
+        dimension: 'diagnosis',
+        choices: [
+          {
+            text: '“When latency and coordination become an issue, where do you feel it most—auction performance, reporting consistency, internal operations, or buyer responsiveness?”',
+            result: 'good',
+            coach: 'Excellent. This helps the buyer localize the problem and makes the conversation concrete. Effective discovery uses focused follow-up questions to understand business impact and operational friction.',
+            nextPublisher: '“Mostly operational complexity and slower response times when multiple partners are involved.”',
+            scores: { diagnosis: 2, trust: 1, clarity: 2, fit: 2 }
+          },
+          {
+            text: '“Would you say your biggest issue is simply not having enough SSP partners in the stack?”',
+            result: 'warn',
+            coach: 'This question narrows too quickly and presumes the answer. In practice, too many SSP relationships can also create overlap, complexity, and slower response paths rather than better performance.',
+            nextPublisher: '“Not really. More partners have actually made parts of the setup harder to manage.”',
+            scores: { diagnosis: 0, trust: -1, clarity: 0, fit: 1 }
+          },
+          {
+            text: '“Understood. Before we get into that, let me show you our feature roadmap.”',
+            result: 'bad',
+            coach: 'Poor path. The rep walks away from the publisher’s stated friction and re-centers the discussion on the product. That reduces the chance of a tailored value conversation.',
+            nextPublisher: '“I’m still not clear why your product is relevant to the issues I mentioned.”',
+            scores: { diagnosis: -1, trust: -1, clarity: -1, fit: -1 }
+          }
+        ]
+      },
+      {
+        title: 'Positioning SSP value',
+        description: 'The rep has enough context to position the solution. Choose the strongest response.',
+        publisher: '',
+        repPrompt: 'Position the SSP in a way that connects the cloud model to the publisher’s actual friction.',
+        dimension: 'positioning',
+        choices: [
+          {
+            text: '“That helps. If coordination overhead and response times are the pain points, the value of our cloud model is not ‘new infrastructure’ by itself. It is a more efficient, controllable auction environment that can reduce operational friction while preserving access to demand and transparency.”',
+            result: 'good',
+            coach: 'Strong consultative positioning. The rep translates platform mechanics into operational and monetization value instead of repeating technical claims. This is the ideal pathway for a next-step conversation.',
+            nextPublisher: '“That framing is more useful. I’d be open to a deeper session with our monetization lead.”',
+            scores: { positioning: 2, trust: 2, clarity: 2, fit: 2 }
+          },
+          {
+            text: '“Our SSP runs in the cloud and has a more modern architecture, so it should outperform legacy systems.”',
+            result: 'warn',
+            coach: 'There is a kernel of value here, but the positioning stays abstract. The rep still needs to tie the architecture to specific issues the publisher named, such as operational complexity or response times.',
+            nextPublisher: '“Maybe, but I’d still need to understand what that changes for us.”',
+            scores: { positioning: 1, trust: 0, clarity: 0, fit: 0 }
+          },
+          {
+            text: '“The biggest advantage is that our product has more advanced capabilities than other SSPs, and we can go feature by feature if you want.”',
+            result: 'bad',
+            coach: 'This reverts to feature comparison before proving business relevance. It increases complexity and does not build on the diagnostic work the rep already did.',
+            nextPublisher: '“I’m not interested in a feature-by-feature comparison right now.”',
+            scores: { positioning: -1, trust: -1, clarity: -1, fit: -1 }
+          }
+        ]
+      }
+    ];
+
+    let currentStep = 0;
+    let scores = { consultative: 0, diagnosis: 0, positioning: 0, trust: 0, clarity: 0, fit: 0 };
+    let pathResults = ['Pending', 'Pending', 'Pending'];
+
+    const stepTitle = document.getElementById('stepTitle');
+    const stepDescription = document.getElementById('stepDescription');
+    const publisherSpeech = document.getElementById('publisherSpeech');
+    const repPrompt = document.getElementById('repPrompt');
+    const decisionGrid = document.getElementById('decisionGrid');
+    const feedbackWrap = document.getElementById('feedbackWrap');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const scoreConsultative = document.getElementById('scoreConsultative');
+    const scoreDiagnosis = document.getElementById('scoreDiagnosis');
+    const scorePositioning = document.getElementById('scorePositioning');
+    const trustScore = document.getElementById('trustScore');
+    const clarityScore = document.getElementById('clarityScore');
+    const fitScore = document.getElementById('fitScore');
+    const stepPill = document.getElementById('stepPill');
+    const pathList = document.getElementById('pathList');
+    const outcomeText = document.getElementById('outcomeText');
+    const outcomeCard = document.getElementById('outcomeCard');
+    const restartBtn = document.getElementById('restartBtn');
+    const pathwayBadges = document.getElementById('pathwayBadges');
+
+    function renderPathList() {
+      const labels = ['Opening discovery', 'Diagnosing challenges', 'Positioning SSP value'];
+      pathList.innerHTML = labels.map((label, idx) => {
+        const status = pathResults[idx];
+        return `<div class="path-item"><span>${label}</span><strong>${status}</strong></div>`;
+      }).join('');
+    }
+
+    function renderBadges() {
+      pathwayBadges.innerHTML = pathResults
+        .filter(x => x !== 'Pending')
+        .map(status => {
+          const cls = status === 'Strong' ? 'good' : status === 'Mixed' ? 'warn' : 'bad';
+          return `<span class="badge ${cls}">${status} path</span>`;
+        }).join('');
+    }
+
+    function updateScores() {
+      scoreConsultative.textContent = scores.consultative;
+      scoreDiagnosis.textContent = scores.diagnosis;
+      scorePositioning.textContent = scores.positioning;
+      trustScore.textContent = scores.trust;
+      clarityScore.textContent = scores.clarity;
+      fitScore.textContent = scores.fit;
+    }
+
+    function updateProgress() {
+      const value = Math.round(((currentStep) / 3) * 100);
+      progressFill.style.width = value + '%';
+      progressText.textContent = currentStep < 3 ? `Step ${currentStep + 1} of 3` : 'Scenario complete';
+    }
+
+    function renderStep() {
+      const step = steps[currentStep];
+      stepTitle.textContent = step.title;
+      stepDescription.textContent = step.description;
+      publisherSpeech.textContent = step.publisher || publisherSpeech.textContent;
+      repPrompt.textContent = step.repPrompt;
+      stepPill.textContent = `Decision point ${currentStep + 1}`;
+      decisionGrid.innerHTML = '';
+      feedbackWrap.innerHTML = '';
+
+      step.choices.forEach((choice, index) => {
+        const button = document.createElement('button');
+        button.className = 'decision';
+        button.innerHTML = `<strong>${choice.text}</strong><small>`;
+        button.addEventListener('click', () => handleChoice(choice, index));
+        decisionGrid.appendChild(button);
+      });
+      renderPathList();
+      renderBadges();
+      updateProgress();
+      updateScores();
+    }
+
+    function outcomeCopy() {
+      const total = scores.trust + scores.clarity + scores.fit;
+      if (currentStep < 3) {
+        if (total >= 4) return 'The rep is building trust and surfacing useful information. The call is moving toward a credible next step.';
+        if (total >= 1) return 'The conversation is still recoverable, but the rep needs to improve precision and relevance in the next move.';
+        return 'Momentum is weak. The publisher is not yet seeing a clear reason to continue the conversation.';
+      }
+      if (total >= 9) return 'Best outcome: the rep earns a follow-up session by diagnosing the publisher’s world and positioning value in business terms.';
+      if (total >= 4) return 'Mixed outcome: the publisher remains open, but the rep has not fully clarified why the cloud-based SSP is the right fit.';
+      return 'Poor outcome: the call loses momentum because the rep defaulted to pitching before understanding the publisher’s needs.';
+    }
+
+    function handleChoice(choice) {
+      feedbackWrap.innerHTML = '';
+      const fb = document.createElement('div');
+      fb.className = `feedback show ${choice.result}`;
+      const statusLabel = choice.result === 'good' ? 'Strong pathway' : choice.result === 'warn' ? 'Mixed pathway' : 'Poor pathway';
+      fb.innerHTML = `
+        <div class="pathway"><span class="badge ${choice.result === 'good' ? 'good' : choice.result === 'warn' ? 'warn' : 'bad'}">${statusLabel}</span></div>
+        <strong>Publisher reaction</strong>
+        <p>${choice.nextPublisher}</p>
+        <div class="coach"><strong>Coaching feedback:</strong> ${choice.coach}</div>
+      `;
+      feedbackWrap.appendChild(fb);
+
+      scores.consultative += choice.scores.consultative || 0;
+      scores.diagnosis += choice.scores.diagnosis || 0;
+      scores.positioning += choice.scores.positioning || 0;
+      scores.trust += choice.scores.trust || 0;
+      scores.clarity += choice.scores.clarity || 0;
+      scores.fit += choice.scores.fit || 0;
+
+      pathResults[currentStep] = choice.result === 'good' ? 'Strong' : choice.result === 'warn' ? 'Mixed' : 'Poor';
+      publisherSpeech.textContent = choice.nextPublisher;
+      outcomeText.textContent = outcomeCopy();
+      renderPathList();
+      renderBadges();
+      updateScores();
+
+      const nextButton = document.createElement('button');
+      nextButton.className = 'restart';
+      nextButton.style.marginTop = '4px';
+      nextButton.textContent = currentStep < 2 ? 'Continue to next decision' : 'View final outcome';
+      nextButton.addEventListener('click', () => {
+        currentStep += 1;
+        if (currentStep < steps.length) {
+          renderStep();
+        } else {
+          finishScenario();
+        }
+      });
+      feedbackWrap.appendChild(nextButton);
+      Array.from(decisionGrid.querySelectorAll('button')).forEach(btn => btn.disabled = true);
+    }
+
+    function finishScenario() {
+      decisionGrid.innerHTML = '';
+      feedbackWrap.innerHTML = '';
+      stepPill.textContent = 'End-state outcome';
+      stepTitle.textContent = 'Scenario complete';
+      stepDescription.textContent = 'Review the final result and reflect on the conversation path.';
+      repPrompt.textContent = 'Use the scorecard and outcome summary to debrief the call.';
+      updateProgress();
+      outcomeText.textContent = outcomeCopy();
+      restartBtn.style.display = 'block';
+
+      const total = scores.trust + scores.clarity + scores.fit;
+      const final = document.createElement('div');
+      final.className = 'feedback show ' + (total >= 9 ? 'good' : total >= 4 ? 'warn' : 'bad');
+      final.innerHTML = total >= 9
+        ? `<strong>End-state: High-quality discovery outcome</strong><p>The publisher agrees to a deeper follow-up because the rep asked strong diagnostic questions and positioned the SSP around operational and monetization relevance.</p><div class="coach"><strong>Learning takeaway:</strong> Consultative sales behavior creates momentum by connecting platform capability to the buyer’s real environment.</div>`
+        : total >= 4
+        ? `<strong>End-state: Partially successful outcome</strong><p>The call stays alive, but the rep leaves value on the table by not fully tying the solution to the publisher’s stated friction.</p><div class="coach"><strong>Learning takeaway:</strong> Discovery must translate into positioning. Good questions alone are not enough.</div>`
+        : `<strong>End-state: Low-momentum outcome</strong><p>The publisher remains unconvinced because the rep relied too heavily on generic product language and did not build a clear case for fit.</p><div class="coach"><strong>Learning takeaway:</strong> In complex B2B conversations, premature pitching usually weakens trust and clarity.</div>`;
+      feedbackWrap.appendChild(final);
+    }
+
+    restartBtn.addEventListener('click', () => {
+      currentStep = 0;
+      scores = { consultative: 0, diagnosis: 0, positioning: 0, trust: 0, clarity: 0, fit: 0 };
+      pathResults = ['Pending', 'Pending', 'Pending'];
+      restartBtn.style.display = 'none';
+      outcomeText.textContent = 'The call is still early. Strong questions will build trust and reveal what matters most to the publisher.';
+      renderStep();
+    });
+
+    renderStep();
+  </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Strategy — Cloud Sales Enablement Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#eef4fb;
+      --paper:#ffffff;
+      --surface:#f7faff;
+      --line:#d8e4f3;
+      --ink:#1a2433;
+      --muted:#667891;
+      --blue:#3e73ff;
+      --blue2:#79a7ff;
+      --gold:#d8b45a;
+      --teal:#58bdb6;
+      --green:#4ea66d;
+      --shadow:0 18px 45px rgba(24,48,86,.10);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(62,115,255,.14), transparent 26%),
+        radial-gradient(circle at 85% 18%, rgba(88,189,182,.12), transparent 24%),
+        linear-gradient(180deg,#f7faff 0%, #eef4fa 100%);
+      color:var(--ink);
+    }
+    .page{width:min(1380px, calc(100vw - 40px)); margin:26px auto 34px; background:rgba(255,255,255,.78); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.8); box-shadow:var(--shadow); border-radius:32px; overflow:hidden}
+    .hero{padding:46px 50px 28px; display:grid; grid-template-columns:1.15fr .85fr; gap:26px; align-items:end; background:linear-gradient(135deg, rgba(255,255,255,.88), rgba(241,246,253,.94)); border-bottom:1px solid var(--line)}
+    .eyebrow{display:inline-flex; align-items:center; gap:10px; padding:8px 14px; border-radius:999px; background:rgba(62,115,255,.08); color:var(--blue); font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase}
+    h1{margin:16px 0 10px; font-family:'DM Serif Display',serif; font-size:58px; line-height:.95; letter-spacing:-.03em; font-weight:400}
+    .subtitle{max-width:780px; font-size:18px; line-height:1.7; color:var(--muted)}
+    .hero-card{background:linear-gradient(180deg, #fff, #f3f8ff); border:1px solid rgba(62,115,255,.12); border-radius:24px; padding:22px 24px; position:relative; box-shadow:0 14px 34px rgba(62,115,255,.10)}
+    .hero-card:before{content:"Program snapshot"; position:absolute; top:-12px; right:18px; background:#e9f0ff; color:var(--blue); font-size:11px; font-weight:800; padding:7px 10px; border-radius:999px; letter-spacing:.05em; text-transform:uppercase}
+    .hero-card h3{margin:0 0 10px; font-size:18px}
+    .hero-card p{margin:0; color:var(--muted); line-height:1.6; font-size:15px}
+    .metrics{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:18px}
+    .metric{padding:14px 14px 12px; border-radius:18px; background:#fff; border:1px solid var(--line)}
+    .metric strong{display:block; font-size:24px}
+    .metric span{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; font-weight:700}
+    .grid{display:grid; grid-template-columns:1.08fr .92fr; gap:22px; padding:24px 26px 34px}
+    .stack{display:grid; gap:18px}
+    .card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:0 10px 28px rgba(19,32,51,.05); overflow:hidden}
+    .card-inner{padding:24px 24px 22px}
+    .section-title{display:flex; align-items:center; gap:12px; margin:0 0 14px; font-size:24px; line-height:1.15}
+    .icon{width:42px; height:42px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(62,115,255,.12), rgba(121,167,255,.24)); color:var(--blue); font-size:20px; flex:0 0 auto}
+    .lead{color:var(--muted); line-height:1.68; font-size:15px; margin:0 0 14px}
+    .pill-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .pill{padding:9px 12px; border-radius:999px; background:var(--surface); color:#31435c; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; border:1px solid #dde7f2}
+    .callout{margin-top:16px; padding:16px 18px; background:#fffdf3; border:1px solid #f3e9b5; border-radius:18px; position:relative; color:#574d1c; line-height:1.6; font-size:14px; box-shadow:0 8px 22px rgba(161,137,22,.07)}
+    .callout:before{content:"Design note"; position:absolute; top:-11px; left:18px; background:#ffe47a; color:#675200; font-weight:800; font-size:11px; letter-spacing:.05em; padding:6px 9px; border-radius:999px; text-transform:uppercase}
+    .process{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:14px}
+    .step{padding:14px 12px; border-radius:18px; background:linear-gradient(180deg,#fbfdff,#f2f7fd); border:1px solid var(--line); min-height:116px}
+    .step small{display:block; color:var(--blue); font-weight:800; text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; font-size:11px}
+    .step strong{display:block; font-size:14px; margin-bottom:6px}
+    .step p{margin:0; font-size:12px; line-height:1.45; color:var(--muted)}
+    .mini-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .mini{border:1px solid var(--line); border-radius:18px; padding:16px; background:#fbfdff}
+    .mini h4{margin:0 0 8px; font-size:15px}
+    .mini p{margin:0; font-size:13px; line-height:1.55; color:var(--muted)}
+    .loop{position:relative; padding:22px; min-height:360px; background:linear-gradient(180deg,#fbfdff,#f4f8fd)}
+    .loop-wrap{position:relative; width:100%; height:308px; display:grid; place-items:center}
+    .center-node{width:196px; height:196px; border-radius:50%; background:linear-gradient(135deg, #3e73ff, #78a7ff); color:#fff; display:grid; place-items:center; text-align:center; padding:28px; box-shadow:0 18px 38px rgba(62,115,255,.28)}
+    .center-node strong{font-size:22px; line-height:1.15; display:block}
+    .center-node span{font-size:13px; opacity:.92; line-height:1.5; display:block; margin-top:8px}
+    .orbit{position:absolute; width:150px; padding:14px 14px 12px; border-radius:20px; background:#fff; border:1px solid var(--line); box-shadow:0 10px 24px rgba(19,32,51,.06)}
+    .orbit b{display:block; font-size:13px; margin-bottom:6px}
+    .orbit p{margin:0; font-size:12px; line-height:1.45; color:var(--muted)}
+    .o1{top:0; left:50%; transform:translateX(-50%)} .o2{top:78px; right:0} .o3{bottom:0; right:40px} .o4{bottom:0; left:40px} .o5{top:78px; left:0}
+    svg.loop-lines{position:absolute; inset:0; width:100%; height:100%}
+    .timeline{display:grid; gap:12px; margin-top:12px}
+    .time-item{display:grid; grid-template-columns:96px 1fr; gap:14px; align-items:start; padding:14px; border-radius:18px; background:#fbfdff; border:1px solid var(--line)}
+    .time-label{font-size:12px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:var(--blue)}
+    .time-item strong{display:block; margin-bottom:6px; font-size:15px}
+    .time-item p{margin:0; color:var(--muted); font-size:14px; line-height:1.6}
+    .table-wrap{margin-top:12px; border:1px solid var(--line); border-radius:20px; overflow:hidden}
+    table{width:100%; border-collapse:collapse; background:#fff}
+    th,td{padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+    th{background:#f8fbff; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em}
+    tr:last-child td{border-bottom:none}
+    td{font-size:14px; line-height:1.6; color:var(--muted)}
+    td strong{color:var(--ink)}
+    .method-list{display:grid; gap:10px; margin-top:10px}
+    .method{padding:14px 16px; border-radius:18px; background:#fbfdff; border:1px solid var(--line)}
+    .method strong{display:block; margin-bottom:6px; font-size:14px}
+    .method span{display:block; color:var(--muted); font-size:13px; line-height:1.55}
+    .totals{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:12px}
+    .total{padding:16px; border-radius:18px; background:#fff; border:1px solid var(--line)}
+    .total strong{display:block; font-size:22px; margin-bottom:4px}
+    .total span{font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:800}
+    @media (max-width:1180px){.grid{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.process{grid-template-columns:repeat(3,1fr)}.metrics,.totals{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:760px){.page{width:min(100vw - 18px, 100%); margin:10px auto 18px}.hero{padding:28px 22px 20px}.grid{padding:18px}.card-inner{padding:20px}.process,.mini-grid,.metrics,.totals{grid-template-columns:1fr}.time-item{grid-template-columns:1fr}.loop-wrap{height:auto; display:grid; gap:12px}.center-node{position:relative; width:100%; height:auto; border-radius:26px}.orbit,.o1,.o2,.o3,.o4,.o5{position:relative; inset:auto; width:100%; transform:none}svg.loop-lines{display:none}h1{font-size:42px}.table-wrap{overflow:auto}table{min-width:680px}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Supporting Material</div>
+        <h1>Learning Strategy</h1>
+        <p class="subtitle">This page outlines the instructional strategy behind the Cloud Sales Enablement Course: a six-module learning experience designed to help sales representatives understand a new cloud infrastructure offering, apply the message in buyer conversations, and retain the skill set through spaced reinforcement and coaching.</p>
+      </div>
+      <aside class="hero-card">
+        <h3>Strategic design intent</h3>
+        <p>The program combines concise instruction, worked examples, scenario-based practice, retrieval, coaching, and cumulative assessment so learning moves from awareness into real sales behavior.</p>
+        <div class="metrics">
+          <div class="metric"><strong>6</strong><span>Core modules</span></div>
+          <div class="metric"><strong>4 weeks</strong><span>Learning journey</span></div>
+          <div class="metric"><strong>~2.5 hrs</strong><span>Total time</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="grid">
+      <div class="stack">
+        <article class="card">
+          <div class="card-inner">
+            <h2 class="section-title"><span class="icon">◎</span>Program architecture</h2>
+            <p class="lead">The course is structured to move from foundational understanding into applied judgment. Early modules simplify the problem space, middle modules strengthen communication and discovery, and later modules focus on objection handling, proof use, and cross-functional decision-making.</p>
+            <div class="pill-row">
+              <span class="pill">Problem framing</span>
+              <span class="pill">Discovery skill</span>
+              <span class="pill">Scenario practice</span>
+              <span class="pill">SE triage</span>
+              <span class="pill">Proof integration</span>
+              <span class="pill">Objection handling</span>
+            </div>
+            <div class="callout">The design intentionally treats product knowledge as necessary but insufficient. The learning experience is built around performance in buyer conversations, not just recall of features.</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-inner">
+            <h2 class="section-title"><span class="icon">◇</span>ADDIE in practice</h2>
+            <p class="lead">ADDIE informed the program at a practical level, not as a rigid waterfall. The process anchored decisions around learner need, performance context, practice design, and measurable transfer.</p>
+            <div class="process">
+              <div class="step"><small>Analyze</small><strong>Sales context</strong><p>Identify the buyer conversations and knowledge gaps reps face when introducing the cloud feature.</p></div>
+              <div class="step"><small>Design</small><strong>Learning flow</strong><p>Sequence modules from concept simplification into realistic conversation tasks.</p></div>
+              <div class="step"><small>Develop</small><strong>Assets and practice</strong><p>Create modules, scenarios, rewrites, coaching tools, and reinforcement activities.</p></div>
+              <div class="step"><small>Implement</small><strong>Blended delivery</strong><p>Combine self-paced modules with manager coaching, peer practice, and live observation.</p></div>
+              <div class="step"><small>Evaluate</small><strong>Transfer signals</strong><p>Measure retention, verbal fluency, applied judgment, and observed call behavior.</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-inner">
+            <h2 class="section-title"><span class="icon">↺</span>Spaced reinforcement</h2>
+            <p class="lead">Reinforcement is distributed across weeks two through four so key concepts are revisited after forgetting has begun. This makes recall harder in the short term, but more durable over time.</p>
+            <div class="timeline">
+              <div class="time-item"><div class="time-label">Week 2</div><div><strong>3 days post-training</strong><p>5-minute retrieval quiz on Modules 1–2 with no review first, plus one manager-scored live call observation using a rubric.</p></div></div>
+              <div class="time-item"><div class="time-label">Week 3</div><div><strong>10 days post-training</strong><p>Scenario challenge using a new buyer objection, followed by model-answer comparison and peer role-play with feedback exchange.</p></div></div>
+              <div class="time-item"><div class="time-label">Week 4</div><div><strong>21 days post-training</strong><p>Cumulative discovery-to-handoff simulation scored on discovery quality, objection handling, SE triage, and proof-point use, followed by reflection on remaining difficulty.</p></div></div>
+            </div>
+            <div class="callout">Expanding review intervals support long-term retention, while interleaving different skills across weeks improves discrimination and reduces the illusion of mastery.</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-inner">
+            <h2 class="section-title"><span class="icon">▣</span>Assessment methods</h2>
+            <p class="lead">Assessment is intentionally multimodal so the program measures more than simple recall. Different task types reveal whether learners can explain, select, apply, and transfer the skill into realistic situations.</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>What it measures</th>
+                    <th>Where it appears</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Retrieval quizzes</strong></td>
+                    <td>Concept retention and ability to recall without notes.</td>
+                    <td>Modules 1–2, spaced reinforcement.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Voice recordings</strong></td>
+                    <td>Verbal fluency and ability to explain value without jargon.</td>
+                    <td>Modules 1–2 buyer-language practice.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Branching scenarios</strong></td>
+                    <td>Applied judgment, discovery sequencing, and conversation steering.</td>
+                    <td>Module 3 and objection-handling practice in Module 6.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Triage classification</strong></td>
+                    <td>Metacognition and knowing when to involve solutions engineering.</td>
+                    <td>Module 4.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Rewrite exercises</strong></td>
+                    <td>Proof integration and tone calibration in written messaging.</td>
+                    <td>Module 5.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Live call observation</strong></td>
+                    <td>Real-world transfer and behavior change.</td>
+                    <td>Manager coaching during spaced reinforcement.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Adaptive simulation</strong></td>
+                    <td>Real-time stakeholder pivoting and handling of novel situations.</td>
+                    <td>Module 6 and future scenario extensions.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="stack">
+        <article class="card loop">
+          <div class="card-inner" style="padding:0">
+            <h2 class="section-title" style="padding:22px 22px 0"><span class="icon">⟳</span>Continuous learning loop</h2>
+            <div class="loop-wrap">
+              <svg class="loop-lines" viewBox="0 0 600 300" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M300 42 C390 54, 450 98, 472 150" stroke="#bcd0f9" stroke-width="2" fill="none"/>
+                <path d="M472 150 C454 214, 405 250, 352 270" stroke="#bcd0f9" stroke-width="2" fill="none"/>
+                <path d="M248 270 C188 248, 145 214, 128 150" stroke="#bcd0f9" stroke-width="2" fill="none"/>
+                <path d="M128 150 C145 94, 204 56, 300 42" stroke="#bcd0f9" stroke-width="2" fill="none"/>
+                <path d="M300 42 C258 56, 162 90, 128 150" stroke="#d6e3ff" stroke-width="1.5" fill="none"/>
+                <path d="M472 150 C430 120, 365 72, 300 42" stroke="#d6e3ff" stroke-width="1.5" fill="none"/>
+              </svg>
+              <div class="center-node"><div><strong>Business-aligned learning</strong><span>Knowledge, practice, reinforcement, transfer, iteration</span></div></div>
+              <div class="orbit o1"><b>Needs analysis</b><p>Start from seller performance gaps and buyer conversation demands.</p></div>
+              <div class="orbit o2"><b>Practice</b><p>Use scenarios, rewrites, and applied tasks to build fluency.</p></div>
+              <div class="orbit o3"><b>Coaching</b><p>Manager observation and peer practice reinforce use on the job.</p></div>
+              <div class="orbit o4"><b>Measurement</b><p>Track retention, transfer, and call-level application.</p></div>
+              <div class="orbit o5"><b>Iteration</b><p>Stakeholder and learner feedback inform updates to the program.</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-inner">
+            <h2 class="section-title"><span class="icon">✦</span>Scientific methods applied</h2>
+            <div class="method-list">
+              <div class="method"><strong>Cognitive load management</strong><span>Begin with the problem space, then introduce the solution so new information has a familiar anchor.</span></div>
+              <div class="method"><strong>Retrieval practice</strong><span>Require recall before review so learners strengthen memory rather than simply re-read content.</span></div>
+              <div class="method"><strong>Spaced repetition</strong><span>Use follow-up reviews at 3, 10, and 21 days to support retention across the forgetting curve.</span></div>
+              <div class="method"><strong>Interleaved practice</strong><span>Mix discovery, objection handling, triage, and message use across weeks rather than blocking by topic.</span></div>
+              <div class="method"><strong>Desirable difficulty</strong><span>Use scenarios that are harder than passive review so the learning demand creates stronger memory traces.</span></div>
+              <div class="method"><strong>Worked examples</strong><span>Show effective performance before expecting learners to produce it independently.</span></div>
+              <div class="method"><strong>Immediate feedback</strong><span>Provide model answers and response guidance directly after the learner attempt.</span></div>
+              <div class="method"><strong>Transfer-appropriate processing</strong><span>Mirror real sales situations so practice closely resembles the context where the skill will be used.</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-inner">
+            <h2 class="section-title"><span class="icon">◫</span>Business connection</h2>
+            <div class="mini-grid">
+              <div class="mini"><h4>Why blended learning</h4><p>A self-paced module alone would support awareness, but not fluency. The blended model adds coaching, observation, and practice where behavior change is most visible.</p></div>
+              <div class="mini"><h4>Why scenarios</h4><p>Scenario-based tasks create a stronger bridge from knowledge to buyer conversation performance than content review alone.</p></div>
+              <div class="mini"><h4>How success is measured</h4><p>Success is defined by better communication, stronger judgment, and observable use of the framework in realistic sales situations.</p></div>
+              <div class="mini"><h4>How feedback informs iteration</h4><p>Stakeholder feedback, learner friction points, and coaching observations identify where modules need clearer support or stronger practice.</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-inner">
+            <h2 class="section-title"><span class="icon">⌛</span>Total time investment</h2>
+            <p class="lead">The design keeps the total experience compact enough for onboarding while still extending learning beyond a single sitting.</p>
+            <div class="totals">
+              <div class="total"><strong>90 min</strong><span>Core learning</span></div>
+              <div class="total"><strong>30 min</strong><span>Spaced practice</span></div>
+              <div class="total"><strong>20 min</strong><span>Manager coaching</span></div>
+              <div class="total"><strong>~2.5 hrs</strong><span>Total journey</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

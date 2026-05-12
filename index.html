@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Sales Enablement Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --surface:#ffffff;
+      --surface-2:#f8fbfe;
+      --text:#132238;
+      --muted:#6c7a90;
+      --border:#dce6f1;
+      --blue:#2f6df6;
+      --blue-dark:#1f56cf;
+      --purple:#6f69f2;
+      --gold:#d2a24b;
+      --shadow:0 18px 42px rgba(16,40,78,.08);
+      --content:1120px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(47,109,246,.10), transparent 24%),
+        radial-gradient(circle at 85% 20%, rgba(111,105,242,.08), transparent 18%),
+        radial-gradient(circle at 85% 80%, rgba(210,162,75,.08), transparent 20%),
+        linear-gradient(180deg,#f9fbff 0%,var(--bg) 100%);
+    }
+    .wrap{max-width:var(--content); margin:0 auto; padding:28px 20px 64px}
+    .hero{
+      background:linear-gradient(135deg, rgba(255,255,255,.94), rgba(243,248,255,.98));
+      border:1px solid var(--border);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      padding:40px;
+      display:grid; grid-template-columns:1.15fr .85fr; gap:24px;
+      position:relative; overflow:hidden;
+    }
+    .hero:after{content:""; position:absolute; right:-50px; top:-40px; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle, rgba(47,109,246,.14), rgba(47,109,246,0));}
+    .eyebrow{display:inline-flex; padding:8px 12px; border-radius:999px; background:#eaf2ff; color:var(--blue); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em}
+    h1{font-size:48px; line-height:1.02; letter-spacing:-.04em; margin:16px 0 14px}
+    .hero p{margin:0; color:var(--muted); font-size:17px; line-height:1.72}
+    .hero-side{background:linear-gradient(180deg,#fff,#faf7ff); border:1px solid rgba(111,105,242,.12); border-radius:26px; padding:22px}
+    .hero-side h3{margin:0 0 10px; font-size:18px}
+    .hero-side ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.75}
+    .section{margin-top:28px}
+    .section h2{font-size:28px; letter-spacing:-.03em; margin:0 0 12px}
+    .section p{margin:0 0 18px; color:var(--muted); line-height:1.7}
+    .grid{display:grid; gap:18px}
+    .modules{grid-template-columns:repeat(2, minmax(0,1fr));}
+    .support{grid-template-columns:repeat(3, minmax(0,1fr));}
+    .card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:22px;
+      box-shadow:0 12px 24px rgba(19,34,56,.05);
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .tag{display:inline-flex; align-self:flex-start; padding:6px 10px; border-radius:999px; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; background:#edf3ff; color:var(--blue)}
+    .card h3{margin:0; font-size:21px; letter-spacing:-.02em}
+    .card p{margin:0; color:var(--muted); line-height:1.68; font-size:15px}
+    .meta{font-size:13px; color:var(--muted); font-weight:700}
+    .actions{margin-top:auto; padding-top:6px}
+    .actions a{display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:#fff; background:var(--blue); padding:11px 15px; border-radius:999px; font-weight:700; font-size:14px}
+    .actions a:hover{background:var(--blue-dark)}
+    .list{display:grid; gap:10px}
+    .list-item{background:var(--surface-2); border:1px solid var(--border); border-radius:18px; padding:14px 16px; color:var(--muted); line-height:1.6}
+    .footer{margin-top:30px; color:var(--muted); font-size:14px; text-align:center}
+    @media (max-width: 900px){
+      .hero,.modules,.support{grid-template-columns:1fr}
+      h1{font-size:40px}
+    }
+    @media (max-width: 640px){
+      .wrap{padding:18px 14px 48px}
+      .hero,.card{padding:22px}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Sales enablement portfolio</div>
+        <h1>Cloud Sales Enablement Course</h1>
+        <p>This site presents a six-module learning experience designed to help sales representatives understand and communicate the value of a cloud infrastructure offering for publishers. The course combines concise instruction, scenario-based practice, reinforcement activities, and applied communication tasks to support both knowledge development and on-the-job transfer.</p>
+      </div>
+      <aside class="hero-side">
+        <h3>Course focus</h3>
+        <ul>
+          <li>Translate technical concepts into buyer-friendly language.</li>
+          <li>Strengthen discovery, objection handling, and messaging skills.</li>
+          <li>Support better sales judgment through applied practice.</li>
+          <li>Reinforce learning through structured follow-up activities.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section">
+      <h2>Course modules</h2>
+      <p>Each module is designed as a standalone learning experience within a broader onboarding journey.</p>
+      <div class="grid modules">
+        <article class="card">
+          <div class="tag">Module 1</div>
+          <h3>The problem Vantage solves</h3>
+          <p>Introduces latency, cost pressure, and signal loss in buyer-friendly language to establish the business context for the course.</p>
+          <div class="actions"><a href="modules/module-1.html">View</a></div>
+        </article>
+        <article class="card">
+          <div class="tag">Module 2</div>
+          <h3>Discovery and qualification</h3>
+          <p>Focuses on consultative discovery questions and how to surface relevant publisher pain points before positioning a solution.</p>
+          <div class="actions"><a href="modules/module-2.html">View</a></div>
+        </article>
+        <article class="card">
+          <div class="tag">Module 3</div>
+          <h3>Branching scenario practice</h3>
+          <p>Uses scenario-based interaction to develop conversation sequencing, judgment, and adaptability in live sales discussions.</p>
+          <div class="actions"><a href="modules/module-3.html">View</a></div>
+        </article>
+        <article class="card">
+          <div class="tag">Module 4</div>
+          <h3>When to involve solutions engineering</h3>
+          <p>Helps sellers identify escalation points, classify requests, and make stronger cross-functional handoff decisions.</p>
+          <div class="actions"><a href="modules/module-4.html">View</a></div>
+        </article>
+        <article class="card">
+          <div class="tag">Module 5</div>
+          <h3>Using proof points and credibility anchors</h3>
+          <p>Develops evidence-based messaging through worked examples, selection checks, and applied rewrite practice.</p>
+          <div class="actions"><a href="modules/module-5.html">View</a></div>
+        </article>
+        <article class="card">
+          <div class="tag">Module 6</div>
+          <h3>Responding to objections</h3>
+          <p>Strengthens objection handling through a consultative framework, mapped examples, and scenario-based practice.</p>
+          <div class="actions"><a href="modules/module-6.html">View</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Supporting Materials</h2>
+      <p>Additional materials document the strategic thinking, enablement assets, and supporting prototypes connected to the course.</p>
+      <div class="grid support">
+        <article class="card">
+          <div class="tag">Learning strategy</div>
+          <h3>Design decisions & rationale</h3>
+          <p>Outlines the blended learning strategy, instructional frameworks, reinforcement approach, and business alignment behind the experience.</p>
+          <div class="actions"><a href="supporting/learning-strategy.html">View</a></div>
+        </article>
+        <article class="card">
+          <div class="tag">Sales enablement</div>
+          <h3>Battlecard</h3>
+          <p>Summarizes publisher pain points, discovery questions, objection handling guidance, and value messaging for sales conversations.</p>
+          <div class="actions"><a href="supporting/sales-battlecard.html">View</a></div>
+        </article>
+        <article class="card">
+          <div class="tag">Interactive practice</div>
+          <h3>Branching scenario</h3>
+          <p>Provides an additional example of scenario-based learning applied to a sales conversation workflow.</p>
+          <div class="actions"><a href="supporting/branching-scenario.html">View</a></div>
+        </article>
+      </div>
+    </section>
+
+    <div class="footer">Cloud Sales Enablement Course • Portfolio presentation site</div>
+  </main>
+</body>
+</html>

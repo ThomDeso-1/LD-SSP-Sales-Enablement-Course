@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selling Cloud to Publishers — Battlecard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #eef4fb;
+      --surface: #ffffff;
+      --surface-2: #f7faff;
+      --border: #d9e4f3;
+      --text: #18263b;
+      --muted: #61738b;
+      --faint: #8c9cb4;
+      --blue: #2f76e5;
+      --blue-soft: #eaf2ff;
+      --blue-mid: #dce9ff;
+      --gray-note: #f7f9fc;
+      --success: #0f8b68;
+      --warning: #9a6500;
+      --shadow: 0 18px 55px rgba(53, 90, 150, 0.12);
+      --shadow-sm: 0 8px 22px rgba(53, 90, 150, 0.08);
+      --radius-xl: 26px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --max: 1200px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(47,118,229,0.10), transparent 24%),
+        linear-gradient(180deg, #f7fbff 0%, var(--bg) 100%);
+      line-height: 1.5;
+    }
+    h1,h2,h3 { font-family: Manrope, Inter, sans-serif; letter-spacing: -0.03em; margin: 0; }
+    h1 { font-size: clamp(2rem, 1.4rem + 2vw, 3.3rem); line-height: 1.02; }
+    h2 { font-size: clamp(1.15rem, 1rem + 0.5vw, 1.45rem); line-height: 1.1; }
+    h3 { font-size: 1rem; line-height: 1.2; }
+    p { margin: 0; }
+    .page { width: min(calc(100% - 24px), var(--max)); margin: 20px auto 34px; }
+    .sheet {
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+    }
+    .hero {
+      padding: 28px 30px 24px;
+      background: linear-gradient(135deg, rgba(234,242,255,0.9), rgba(255,255,255,0.95) 55%);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      background: var(--blue-soft); color: var(--blue); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800;
+    }
+    .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 6px rgba(47,118,229,0.08); }
+    .hero p { margin-top: 12px; color: var(--muted); max-width: 62ch; }
+    .hero-right {
+      background: rgba(255,255,255,0.76); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px; box-shadow: var(--shadow-sm);
+    }
+    .mini-grid { display:grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-top: 14px; }
+    .mini {
+      background: #fff; border:1px solid var(--border); border-radius: 16px; padding: 12px;
+    }
+    .mini .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--faint); font-weight: 700; }
+    .mini .value { margin-top: 6px; font-weight: 700; font-size: 0.92rem; }
+    .grid {
+      display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 14px; padding: 18px;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px; box-shadow: var(--shadow-sm);
+    }
+    .card p { color: var(--muted); }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+    .section-top { display:flex; justify-content:space-between; gap:12px; align-items:start; margin-bottom: 12px; }
+    .icon {
+      width: 40px; height: 40px; border-radius: 14px; display:grid; place-items:center; font-size: 0.9rem; font-weight: 800;
+      background: linear-gradient(180deg, var(--blue-soft), #f5f9ff); color: var(--blue); border: 1px solid var(--blue-mid);
+      flex: 0 0 auto;
+    }
+    .list { display:grid; gap: 10px; padding: 0; margin: 12px 0 0; list-style: none; }
+    .list li {
+      display:grid; grid-template-columns: 16px 1fr; gap: 10px; align-items:start; color: var(--muted);
+    }
+    .list li::before {
+      content:""; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); margin-top: 8px; box-shadow: 0 0 0 6px rgba(47,118,229,0.08);
+    }
+    .pitch {
+      font-size: 1.03rem; line-height: 1.6; color: var(--text); background: linear-gradient(180deg, #ffffff, #f8fbff);
+      border: 1px solid var(--border); border-radius: 18px; padding: 16px 18px; margin-top: 12px;
+    }
+    .objection {
+      padding: 14px 0; border-top: 1px solid #e9eff8;
+    }
+    .objection:first-of-type { border-top: none; padding-top: 0; }
+    .objection q { display:block; font-weight: 700; color: var(--text); font-style: normal; }
+    .rebuttal { margin-top: 8px; color: var(--muted); }
+    .sticky-row { display:grid; gap: 12px; margin-top: 12px; }
+    .sticky {
+      position: relative; background: var(--gray-note); border: 1px solid var(--border); border-radius: 16px; padding: 14px 16px 14px 18px;
+      box-shadow: 0 6px 12px rgba(40, 64, 103, 0.05);
+    }
+    .sticky::before {
+      content:""; position:absolute; left: 0; top: 0; bottom: 0; width: 6px; border-radius: 16px 0 0 16px; background: linear-gradient(180deg, var(--blue), #73a4ff);
+    }
+    .sticky .label { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); font-weight: 800; margin-bottom: 6px; }
+    .split { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .pill {
+      display:inline-flex; align-items:center; gap:8px; padding: 7px 10px; border-radius: 999px; background: var(--blue-soft); color: var(--blue);
+      font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .pill.success { background: #e8faf3; color: var(--success); }
+    .pill.warn { background: #fff5e5; color: var(--warning); }
+    .footer-bar {
+      padding: 14px 20px 20px; color: var(--faint); font-size: 0.84rem; text-align:center;
+    }
+    @media (max-width: 980px) {
+      .hero, .split { grid-template-columns: 1fr; }
+      .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
+    }
+    @media (max-width: 640px) {
+      .page { width: min(calc(100% - 12px), var(--max)); margin-top: 10px; }
+      .hero { padding: 20px; }
+      .grid { padding: 12px; gap: 12px; }
+      .card { padding: 16px; }
+      .mini-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="sheet">
+      <header class="hero">
+        <div>
+          <div class="eyebrow"><i></i> Sales Enablement Battlecard</div>
+          <h1 style="margin-top:14px;">Selling Cloud to Publishers</h1>
+          <p>Use this battlecard to lead with publisher outcomes, ask sharper discovery questions, and position a cloud-based SSP as an operational and monetization advantage rather than a technical novelty.</p>
+          <div class="pitch">
+            <strong>Elevator pitch</strong><br>
+            A cloud-based SSP gives publishers a more flexible way to run auctions and monetization logic closer to where impressions happen, helping reduce operational friction, improve transparency, and create better conditions for revenue performance and control.
+          </div>
+        </div>
+        <aside class="hero-right">
+          <h3>How to use this asset</h3>
+          <p style="margin-top:8px;">Lead with business context, not architecture. Diagnose the publisher’s current friction first, then map the value story to what they actually need to improve.</p>
+          <div class="mini-grid">
+            <div class="mini"><div class="label">Primary buyer lens</div><div class="value">Revenue + operational efficiency</div></div>
+            <div class="mini"><div class="label">Rep behavior</div><div class="value">Consultative, not feature-led</div></div>
+            <div class="mini"><div class="label">Best use</div><div class="value">Discovery and first follow-up calls</div></div>
+            <div class="mini"><div class="label">Escalation point</div><div class="value">Complex workflow or architecture questions</div></div>
+          </div>
+        </aside>
+      </header>
+
+      <main class="grid">
+        <section class="card span-4">
+          <div class="section-top">
+            <div>
+              <h2>Publisher pain points</h2>
+            </div>
+            <div class="icon">01</div>
+          </div>
+          <ul class="list">
+            <li>Operational complexity across multiple partners can make monetization harder to manage and obscure where revenue performance is actually coming from.</li>
+            <li>Publishers want stronger control over pricing, buyer access, and inventory quality, not just more demand connections.</li>
+            <li>Teams are under pressure to improve yield, fill rates, reporting visibility, and auction efficiency without creating more overhead.</li>
+          </ul>
+        </section>
+
+        <section class="card span-4">
+          <div class="section-top">
+            <div>
+              <h2>Key discovery questions</h2>
+            </div>
+            <div class="icon">02</div>
+          </div>
+          <ul class="list">
+            <li>Where does your current setup feel strongest, and where does it create the most friction for your team?</li>
+            <li>How are you evaluating auction efficiency today: revenue lift, latency, reporting clarity, operational overhead, or partner responsiveness?</li>
+            <li>When you think about adding or changing an SSP partner, what would need to improve to make that worthwhile?</li>
+            <li>Which internal stakeholders care most about this decision, and what outcomes matter most to each of them?</li>
+          </ul>
+        </section>
+
+        <section class="card span-4">
+          <div class="section-top">
+            <div>
+              <h2>SSP value messaging</h2>
+            </div>
+            <div class="icon">03</div>
+          </div>
+          <ul class="list">
+            <li>Broader advertiser access can create stronger competition for inventory and support better monetization outcomes.</li>
+            <li>Granular controls help publishers protect pricing, manage buyer access, and maintain closer control over inventory quality.</li>
+            <li>Analytics and reporting visibility support faster optimization decisions and clearer performance management.</li>
+          </ul>
+        </section>
+
+        <section class="card span-7">
+          <div class="section-top">
+            <div>
+              <h2>Common objections and rebuttals</h2>
+            </div>
+            <div class="icon">04</div>
+          </div>
+
+          <div class="objection">
+            <q>We already have header bidding. Why would cloud be meaningfully different?</q>
+            <div class="rebuttal">Acknowledge that maturity first. Then reframe the conversation around whether the current operating model is creating friction in coordination, visibility, or auction efficiency. The goal is not to sell “newness,” but to show how a cloud-based model can support more efficient execution and clearer control if those issues are present.</div>
+          </div>
+
+          <div class="objection">
+            <q>More SSPs usually means more complexity, not better results.</q>
+            <div class="rebuttal">Agree that more partners do not automatically improve outcomes. In many publisher environments, complexity itself becomes a monetization problem, which is why the discussion should focus on path efficiency, reporting clarity, and the value of a partner that helps simplify decision-making rather than just adding another logo.</div>
+          </div>
+
+          <div class="objection">
+            <q>We need proof, not another platform promise.</q>
+            <div class="rebuttal">That is a healthy objection. Shift into evidence-based discovery: define the current baseline, identify the specific friction points, and align on what proof would matter most, such as clearer revenue visibility, operational efficiency, or auction performance signals.</div>
+          </div>
+        </section>
+
+        <section class="card span-5">
+          <div class="section-top">
+            <div>
+              <h2>Competitive differentiation</h2>
+            </div>
+            <div class="icon">05</div>
+          </div>
+          <div class="sticky-row">
+            <div class="sticky">
+              <div class="label">Differentiate on</div>
+              A partner model centered on transparency, efficiency, and control rather than “more pipes” or vague infrastructure claims.
+            </div>
+            <div class="sticky">
+              <div class="label">Do not say</div>
+              “We are more advanced because we use cloud.” On its own, that is not a business case.
+            </div>
+            <div class="sticky">
+              <div class="label">Better framing</div>
+              “If your current setup is slowing decisions, reducing visibility, or adding coordination overhead, this model may create a cleaner path to performance and control.”
+            </div>
+          </div>
+        </section>
+
+        <section class="card span-6">
+          <div class="section-top">
+            <div>
+              <h2>When to involve solutions engineering</h2>
+            </div>
+            <div class="icon">06</div>
+          </div>
+          <div class="split">
+            <div>
+              <div class="pill success">Bring them in</div>
+              <ul class="list" style="margin-top:10px;">
+                <li>The buyer wants to understand implementation, integrations, or auction workflow implications.</li>
+                <li>The conversation shifts from commercial fit to technical feasibility or migration design.</li>
+                <li>Multiple internal stakeholders need a deeper architecture or operations discussion.</li>
+              </ul>
+            </div>
+            <div>
+              <div class="pill warn">Do not bring them in yet</div>
+              <ul class="list" style="margin-top:10px;">
+                <li>The publisher has not clearly articulated the problem they are trying to solve.</li>
+                <li>The rep is still qualifying urgency, goals, and stakeholder priorities.</li>
+                <li>The conversation can still be advanced through stronger discovery and business framing.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card span-6">
+          <div class="section-top">
+            <div>
+              <h2>Talk track reminders</h2>
+            </div>
+            <div class="icon">07</div>
+          </div>
+          <ul class="list">
+            <li>Start with the publisher’s current state, not the product architecture.</li>
+            <li>Use words like efficiency, visibility, control, revenue quality, and operational simplicity.</li>
+            <li>Translate every technical claim into a buyer-relevant outcome before moving on.</li>
+            <li>Earn the right to deeper technical detail by diagnosing the commercial problem first.</li>
+          </ul>
+        </section>
+      </main>
+
+      <div class="footer-bar">
+        Portfolio-style fictional battlecard created for a sales enablement scenario.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
