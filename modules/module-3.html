@@ -165,7 +165,27 @@
     .rubric-card span{display:block; font-size:13px; color:var(--muted); line-height:1.5}
 
     .footer-cta{text-align:center; padding:18px 10px 6px; color:var(--muted); font-size:14px; line-height:1.6}
+.home-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #d9e3f5;
+  color: #2457d6;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 8px 24px rgba(36, 87, 214, 0.08);
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
 
+.home-button:hover {
+  transform: translateY(-1px);
+  background: #f7faff;
+  box-shadow: 0 12px 28px rgba(36, 87, 214, 0.12);
+}
     @media (max-width: 900px){
       .hero,.question-grid,.response-grid,.rubric{grid-template-columns:1fr}
       .response-box + .response-box{border-left:none; border-top:1px solid var(--border)}
@@ -181,6 +201,8 @@
   </style>
 </head>
 <body>
+  <div class="shell">
+    <a href="../index.html" class="home-button">← Back to Home</a>
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand"><div class="logo">V</div> Vantage SSP • Module 3 Showcase</div>
@@ -324,7 +346,7 @@
       <section class="block">
         <div class="block-inner">
           <div class="section-kicker">Written drill</div>
-          <h2>Rewrite the objection response</h2>
+          <h2>Write the objection response</h2>
           <div class="drill">
             <h3>Prompt</h3>
             <p>A buyer says: “We are not looking to change infrastructure right now.” Write a short response that acknowledges the concern, reframes the conversation, and brings the discussion back to business impact.</p>
@@ -359,5 +381,6 @@
       });
     });
   </script>
+</div>
 </body>
 </html>

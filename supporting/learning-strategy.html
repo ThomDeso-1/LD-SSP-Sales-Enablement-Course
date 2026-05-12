@@ -96,11 +96,34 @@
     .total{padding:16px; border-radius:18px; background:#fff; border:1px solid var(--line)}
     .total strong{display:block; font-size:22px; margin-bottom:4px}
     .total span{font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:800}
+    .home-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #d9e3f5;
+  color: #2457d6;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 8px 24px rgba(36, 87, 214, 0.08);
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.home-button:hover {
+  transform: translateY(-1px);
+  background: #f7faff;
+  box-shadow: 0 12px 28px rgba(36, 87, 214, 0.12);
+}
     @media (max-width:1180px){.grid{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.process{grid-template-columns:repeat(3,1fr)}.metrics,.totals{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:760px){.page{width:min(100vw - 18px, 100%); margin:10px auto 18px}.hero{padding:28px 22px 20px}.grid{padding:18px}.card-inner{padding:20px}.process,.mini-grid,.metrics,.totals{grid-template-columns:1fr}.time-item{grid-template-columns:1fr}.loop-wrap{height:auto; display:grid; gap:12px}.center-node{position:relative; width:100%; height:auto; border-radius:26px}.orbit,.o1,.o2,.o3,.o4,.o5{position:relative; inset:auto; width:100%; transform:none}svg.loop-lines{display:none}h1{font-size:42px}.table-wrap{overflow:auto}table{min-width:680px}}
   </style>
 </head>
 <body>
+  <div class="shell">
+    <a href="../index.html" class="home-button">← Back to Home</a>
   <main class="page">
     <section class="hero">
       <div>
@@ -181,17 +204,17 @@
                   <tr>
                     <td><strong>Retrieval quizzes</strong></td>
                     <td>Concept retention and ability to recall without notes.</td>
-                    <td>Modules 1–2, spaced reinforcement.</td>
+                    <td>Modules 1–3, spaced reinforcement.</td>
                   </tr>
                   <tr>
                     <td><strong>Voice recordings</strong></td>
                     <td>Verbal fluency and ability to explain value without jargon.</td>
-                    <td>Modules 1–2 buyer-language practice.</td>
+                    <td>Modules 1 buyer-language practice.</td>
                   </tr>
                   <tr>
-                    <td><strong>Branching scenarios</strong></td>
+                    <td><strong>Written drills</strong></td>
                     <td>Applied judgment, discovery sequencing, and conversation steering.</td>
-                    <td>Module 3 and objection-handling practice in Module 6.</td>
+                    <td>Module 2 and 3.</td>
                   </tr>
                   <tr>
                     <td><strong>Triage classification</strong></td>
@@ -286,5 +309,6 @@
       </div>
     </section>
   </main>
+</div>
 </body>
 </html>

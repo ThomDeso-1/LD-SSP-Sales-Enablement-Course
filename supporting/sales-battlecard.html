@@ -132,6 +132,27 @@
     .footer-bar {
       padding: 14px 20px 20px; color: var(--faint); font-size: 0.84rem; text-align:center;
     }
+.home-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #d9e3f5;
+  color: #2457d6;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 8px 24px rgba(36, 87, 214, 0.08);
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.home-button:hover {
+  transform: translateY(-1px);
+  background: #f7faff;
+  box-shadow: 0 12px 28px rgba(36, 87, 214, 0.12);
+}
     @media (max-width: 980px) {
       .hero, .split { grid-template-columns: 1fr; }
       .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
@@ -146,6 +167,8 @@
   </style>
 </head>
 <body>
+  <div class="shell">
+    <a href="../index.html" class="home-button">← Back to Home</a>
   <div class="page">
     <div class="sheet">
       <header class="hero">
@@ -308,6 +331,7 @@
         Portfolio-style fictional battlecard created for a sales enablement scenario.
       </div>
     </div>
+  </div>
   </div>
 </body>
 </html>
